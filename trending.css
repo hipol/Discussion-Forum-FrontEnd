@@ -1,0 +1,38 @@
+@font-face { font-family: "glober"; src: url('Glober Thin Free.otf'); } 
+@font-face { font-family: "glober"; font-weight: bold; src: url('Glober SemiBold Free.otf'); } 
+
+
+#issue_container{
+	width: 600px;
+	margin: 40px;
+	margin-right: auto;
+    margin-left: auto;
+	font-family: "glober","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#title_container{
+	background-color: #cfe8e3;
+	border-radius: 10px 10px 0px 0px ;
+	padding: 10px;
+	text-align: center;
+	height: auto;
+}
+
+#issue_title{
+	font-size: 30px;
+	padding: 10px;
+	font-weight: bold;
+	text-transform: capitalize;
+	text-decoration: underline;
+}
+
+#extra_container{
+	position: relative;
+	height: 100%;
+	right:0;
+	width:400px;
+	background-color: #0b5647;
+	border-radius: 0px 0px 10px 10px;
+	border-radius: 0px 10px 10px 0px ;
+}
+

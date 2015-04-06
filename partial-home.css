@@ -1,0 +1,41 @@
+
+
+#sidebar{
+	background: #f8fafa;
+	position: fixed;
+	top:48px;
+	right: 0;
+	width: 250px;
+	display: block;
+	min-height: 100vh !important;
+
+	z-index: 9998;
+
+}
+
+#mainview{
+	background: #fcfefd;
+	position: relative;
+	top:48px;
+	left: 0;
+	width: auto;
+	display: block;
+	min-height: 100vh !important;
+	margin-right: 250px;
+}
+
+
+@media (min-width:300px) and (max-width: 800px) { 
+
+	#sidebar{
+		display: none;
+	}
+
+	#mainview{
+	margin-right: 0px;
+}
+
+}
+
+
+

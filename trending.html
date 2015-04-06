@@ -1,0 +1,23 @@
+<link rel='stylesheet' href='trending.css' type='text/css' charset='utf-8'>
+
+<div id="issue_container" ng-repeat="issue in main">
+	<div id = "individual_container">
+
+
+		<div id="title_container" >
+			   
+			<div id="issue_title" >
+				{{ issue.title }}
+			</div>
+		</div>
+
+		<div id="extra_container" ng-repeat="actionplan in issue.action_plan_id">
+				{{ actionplan}}
+			    
+		</div>
+	</div>
+</div>
+
+
+
+        

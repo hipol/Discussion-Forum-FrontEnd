@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign Up</title>
+		<link rel='stylesheet' href='{{ url_for('static', filename='css/SignUpPage.css') }}' type='text/css' charset='utf-8'>
+		<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+	    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js">
+	    </script>
+	    <script src="js/app.js"></script>
+	</head>
+
+	<body ng-app="routerApp">
+		<img src="{{ url_for('static', filename='assets/jfk_large_02.jpg') }}" class="bg">
+		<div id="bgmask"></div>
+		<!-- Start of NavBar-->
+		<div id="MenuContainer">
+	        <ul id="navigation">
+	        	<li class="logo"><a id="Logo" href="LandingPage.html">UPolitical</a></li>
+	        	<li class="parent"><a id="Trending" href="{{ url_for('communbp.home') }}">Trending</a></li>
+	            <li class="parent"><a id="National" href="#" >National</a></li>
+	            <li class="parent"><a id="Provincial" href="#" >Provincial</a></li>
+	            <li class="parent"id="Local"><a  href="#" >Local</a>
+	                <ul class="submenu" id="Localmenu">
+		                <li> <a href="#">London</a> </li>
+		                <li> <a href="#">Halifax</a> </li>
+	           		 </ul>
+	            </li>
+	        </ul>
+	        <div id="national-dropdown">
+	        </div>
+	       	<div id="searchbutton-holder">
+		     	<fieldset id="searchactions">
+		     		<div id="searchholder">
+		     			<input id="search" class="input" type="search" name="Search" placeholder="Search" required>
+		     	 	</div>
+		      		<div id="searchsubmitholder">
+		      			<input type="submit" id="searchsubmit" value ="GO">
+		      		</div>
+		    	</fieldset>
+		    </div>
+	        <div id="login" href="#"> Login </div>
+	        <div id="reveal"> 
+	        	<img src="{{ url_for('static', filename='assets//horizontalbars.png') }}" class="bars">
+	        </div>
+	    </div> 
+	    <!-- End of NavBar-->
+
+
+		<div id = 'signup-wrap'>
+			{% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+			<h2>Sign Up</h2>
+		    <form id="signup-form" method="post">
+		      <fieldset id="signup-fields">
+		      	<input id="firstname" class="input" type="firstnmame" name="first_name" placeholder="First Name" required>
+		      	<br>
+		      	<input id="lastname" type="lastnmame" name="last_name" placeholder="Last Name" required>
+		      	<br>
+		      	<input id="city" class="input"  type="city" name="city" placeholder="City" required>
+		        <br>
+		      	<input id="state/province" class="input"  type="state/province" name="state" placeholder="State or Province" required>
+		        <br>
+		        <input id="country" class="input"  type="country" name="country" placeholder="Country" required>
+		        <br>
+		        <input id="username" class="input"  type="email" name="email" placeholder="Email Address" required>   
+		        <br>
+		        <input id="password" class="input"  type="password" name="password" placeholder="Password" required>
+		      </fieldset>
+		      <div id="signupbutton-holder">
+		     	<fieldset id="signupactions">
+		      		<input type="submit" id="signupsubmit" value ="Register">
+		    	</fieldset>
+		      </div>
+		    </form>
+	    <div>
+	</body>
+</html>

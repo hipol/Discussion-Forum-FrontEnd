@@ -1,0 +1,9 @@
+#fullview{
+	background: #fcfefd;
+	position: relative;
+	top:48px;
+	left: 0;
+	width: auto;
+	display: block;
+	min-height: 100vh !important;
+}

@@ -1,0 +1,115 @@
+<!-- NAVIGATION -->
+<div id="MenuContainer">
+            <ul id="navigation">
+                <li class="logo"><a id="Logo" ui-sref="home">UPolitical</a></li>
+                <li class="active"><a class="white" id="Trending" ui-sref="trending" >Trending</a></li>
+           <!--     <li class="parent"><a class="white" id="National" href="#" >National</a></li>
+                <li class="parent"><a class="white" id="Provincial" href="#" >Provincial</a></li> 
+                <li class="parent"id="Local"><a class="white" href="#" >Local</a>
+                    <ul class="submenu" id="Localmenu">
+                        <li> <a href="#">London</a> </li>
+                        <li> <a href="#">Halifax</a> </li>
+                     </ul>
+                </li>
+             -->
+                <li class="parent"><a class="white" id="London" ui-sref="london" >London</a></li>
+                <li class="parent"><a class="white" id="Bridgewater" ui-sref="bridgewater" >Bridgewater</a></li> 
+            </ul>
+            <div id="national-dropdown">
+            </div>
+            <div id="searchbutton-holder">
+                <fieldset id="searchactions">
+                    <div id="searchholder">
+                        <input id="search" class="input" type="search" name="Search" placeholder="Search" required>
+                    </div>
+                    <div id="searchsubmitholder">
+                        <input type="submit" id="searchsubmit" value ="GO">
+                    </div>
+                </fieldset>
+            </div>
+
+
+<!--    {% if g.user %}    -->
+    <div id="login"> <a id="login-click" href="/logout"> Logout </a> </div>
+<!--    {% else %}    -->
+    <div id="login"> <a id="login-click" href="#"> Login </a> </div>
+<!--    {% endif %}      -->
+
+
+
+
+
+
+<div id="loginbox">
+  <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    <form name="form" ng-submit="login()" role="form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <i class="fa fa-key"></i>
+            <input type="email" name="email" id="email" class="form-control" ng-model="email" required />
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Login</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--       
+            <div id="loginbox"> 
+                <form id="login-form" action="/login"method="post">
+                  <fieldset id="inputs">
+                    <input id="username" type="email" name="email" placeholder="Your email address" required>   
+                    <input id="password" type="password" name="password" placeholder="Password" required>
+                  </fieldset>
+                  <div id="button-holder">
+                    <fieldset id="actions">
+                        <input type="submit" id="submit" value ="Log in">
+                    </fieldset>
+                  </div>
+                </form>
+            </div>
+-->
+
+<!--            <div id='error'>
+                {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+            </div>
+            <div id='flash'>
+              {% with flashes = get_flashed_messages() %}
+    {% if flashes %}
+      <ul class="flashes">
+      {% for message in flashes %}
+        <li>{{ message }}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+-->
+            </div>
+            <div id="myaccount" href="#"> My Account </div>
+            <div id="reveal"> 
+                <img src="assets/img/horizontalbars.png" class="bars" id="revealbars">
+            </div>
+        </div> 

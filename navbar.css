@@ -1,0 +1,466 @@
+html{
+  overflow-x: hidden;
+}
+
+body{
+	margin:0px;
+}
+
+/** Nav bar begins **/
+
+.MenuContainer {
+    height: 70px;
+    bottom:0;
+}
+
+ul#navigation {
+	z-index: 9999;
+	top:0px;
+	left:0px;
+    height: 48px;
+    line-height: 47px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 21px;
+	font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    position: fixed;
+ 	bottom: 0;
+ 	width: 105%;
+	text-decoration: none;
+	background: #16a085;
+
+	background-image: linear-gradient(to bottom, #16a085, #139077);
+ 	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+
+ul#navigation li {
+    display: inline;
+    float: left;
+    margin-right: .75em;
+    list-style: none;
+    margin:0;
+    font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+}
+
+
+
+ul.submenu{
+	width: auto;
+	max-width: 140px;
+    padding: 0px 0px;
+    margin: 0px;
+    background: #4C1C76;
+    position: fixed;
+    left:0px;
+    z-index: 9999;
+    display: none;
+   
+
+
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+}
+
+
+
+
+ul.submenu ul{
+    left: 180px;
+    top:0px;
+}
+ 
+ul.submenu li{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    margin: auto;
+    display: block;
+    float: left;
+    border-top: 1px solid #F1F1F1;
+    line-height: 40px;
+    text-transform: none;
+}
+
+ul.submenu a{
+	padding: 0px;
+}
+
+
+
+ul#navigation li:link{
+	text-decoration: none;
+	color: #FFFFFF;
+}
+    
+ul#navigation a:hover{
+	cursor: pointer;
+}
+
+#navigation .logo a:hover{
+	color: #ecf0f1;
+}
+
+
+ul#navigation li.last {
+    margin-right: 0;
+}
+
+#navigation a{
+	-webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+
+#navigation a:hover{
+	background-color: rgba(0,0,0,0.1);
+}
+
+#navigation .active a{
+	background-color: rgba(0,0,0,0.5);
+	cursor: default !important;
+}
+
+#navigation .active{
+	color: #ecf0f1;
+	cursor: default !important;
+}
+
+#navigation .logo a{
+	background: #222222;
+	color: white;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 15px;
+}
+
+#navigation .parent a{
+	color: white;
+}
+
+#login{
+	z-index: 9999;
+	position: fixed;
+	top: 11px;
+	right: 10px;
+	text-decoration: none;
+
+	display: inline;
+    float: left;
+    margin-right: .75em;
+    list-style: none;
+    margin:0;
+    font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:2px;
+    
+}
+
+#login:hover{
+	color: rgba(255,255,255,0.8);
+	cursor: pointer;
+}
+
+
+/*************** ********************************************/
+#myaccount{
+	
+	position: fixed;
+	top: 11px;
+	right: 10px;
+
+	display: inline;
+    float: left;
+    margin-right: .75em;
+    list-style: none;
+    margin:0;
+    font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:2px;
+
+    display: none;
+}
+
+#myaccount:hover{
+	color: rgba(255,255,255,0.8);
+	cursor: pointer;
+}
+
+#reveal{
+	display: none;
+	position: fixed;
+	top: 6px;
+}
+
+.bars{
+	z-index: 9999;
+	width: 41px;
+}
+
+#searchbutton-holder{
+	z-index: 9999;
+	position: fixed;
+	top: 2px;
+	right: 60px;
+
+	display: inline;
+    float: left;
+    margin-right: .75em;
+    list-style: none;
+    margin:0;
+    font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:0px;
+    padding-top:1px;
+    border: none;
+}
+
+#searchactions {
+  	border: none;
+  	text-align: center;
+}
+
+#searchsubmit{
+	right: 600px;
+	background: rgba(0,0,0,0.2);
+	border: 3px solid black;
+	border-radius: 10px;
+	color: black;
+	font-weight: bold;
+	font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+}
+
+#searchsubmit:hover{
+	background: rgba(0,0,0,0.4);
+	cursor: pointer;
+}
+
+#searchsubmitholder{
+	position: fixed;
+	float: left;
+	top: 7.5px;
+	right: 92px;
+}
+
+#search{
+	background: transparent;
+	width: 150px;
+	padding: 1.5px;
+	border: 3px solid black;
+	border-radius: 10px;
+	color: black;
+	font-weight: bold;
+	font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+#searchholder{
+	position: fixed;
+	float: left;
+	top: 9px;
+	right: 127px;
+}
+
+#search:hover{
+	background: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 459px){
+
+	#reveal{
+		display: block;
+		z-index: 9999;
+		left: 120px;
+	}
+
+	#navigation .logo a{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	#reveal:hover{
+		cursor:pointer;
+	}
+	
+	#search{
+		width:100px;
+	}
+
+	#navigation .parent a {
+		display: none;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+
+	#searchsubmitholder{
+		right: 82px;
+	}
+
+	#searchholder{
+		right: 117px;
+	}
+
+
+}
+
+@media (max-width: 819px) and (min-width: 460px){
+
+	#reveal{
+		display: block;
+		z-index: 9999;
+		left: 170px;
+	}
+	
+	#search{
+		width:100px;
+	}
+
+	#navigation .parent a {
+		display: none;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+
+}
+
+@media (max-width: 855px) and (min-width: 820px) { 
+
+	#navigation a {
+		padding: 20px;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	#search{
+		width:20vw;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+
+}
+
+@media (max-width: 953px) and (min-width: 856px) { 
+
+	#navigation a {
+		padding: 25px;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	#search{
+		width:20vw;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+}
+
+@media (max-width: 1099px) and (min-width: 954px) { 
+
+	#navigation a {
+		padding: 35px;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	#search{
+		width:20vw;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+}
+
+@media (min-width: 1100px) { 
+
+	#navigation a {
+		padding: 4.0vw;
+	}
+	#navigation ul.submenu a{
+		padding: 0px;
+	}
+
+	#search{
+		width:20vw;
+	}
+
+	textarea:focus, input:focus{
+    outline: 0;
+	}
+}
+
+#navigation a {
+    padding-top:14px;
+    padding-bottom:14px;
+	text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+   color: rgba(0,0,0,0.3);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: rgba(0,0,0,0.3);
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(0,0,0,0.3);
+}
+
+:-ms-input-placeholder {  
+   color: rgba(0,0,0,0.3);
+}
+
+/** Nav bar ends **/
+
+a{
+	text-decoration: none;
+	color: white;
+}
+
+#loginbox form{
+	z-index: 9999;
+	position: fixed;
+	display: block;
+	width: 200px;
+	height: 80px;
+	top: 50px;
+	right: 30px;
+	background-color: red;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+
+
+

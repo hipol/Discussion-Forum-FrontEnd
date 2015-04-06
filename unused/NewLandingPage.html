@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' href='css/New Landing Page.css' type='text/css' charset='utf-8'>
+		<link rel='stylesheet' href='css/partial-issue.css' type='text/css' charset='utf-8'>
+
+   		<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+	    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+		<script src="js/app.js"></script>
+
+		<title>Home Page</title>
+	</head>
+	<body ng-app="routerApp">
+		<div id='wrapper'>
+			<nav>
+			    <div id="login">
+			      <div id="login-content">
+			        <form id="login-form">
+			          <fieldset id="inputs">
+			            <input id="username" type="email" name="Email" placeholder="Your email address" required>   
+			            <input id="password" type="password" name="Password" placeholder="Password" required>
+			          </fieldset>
+			          <div id="button-holder">
+			         	<fieldset id="actions">
+			          		<input type="submit" id="submit" value ="Log in">
+			        	</fieldset>
+			          </div>
+			        </form>
+			      </div>                     
+			    </div>
+			    <!--
+			    <div id='searchfield'>
+					<form id='search form' method='get' action="http://google.com">
+					   <input type="text" placeholder="Search..." required>
+	                   <input type="submit" value="Search">
+				   	</form>
+				</div>
+			-->
+				<div id='title'>
+					<img id= "largelogo" src="./UPolitical Logo.png"></img>
+				</div>
+				<div id='title2'>
+					<img id= "smalllogo" src="./coffee-logo.png"></img>
+				</div>
+			    <div id="MenuContainer">
+			        <ul id="navigation">
+			        	<li class= "active"><a id="Trending" href="#" >Trending</a></li>
+			            <li><a id="International" href="#" >International</a></li>
+			            <li><a id="National" href="#" >National</a></li>
+			            <li><a id="Provincial" href="#" >Provincial</a></li>
+			            <li class="parent"id="Local"><a  href="#" >Local</a>
+			                <ul class="submenu" id="Localmenu">
+				                <li> <a href="#">London</a> </li>
+				                <li> <a href="#">Halifax</a> </li>
+			           		 </ul>
+			            </li>
+			        </ul>
+			        <div id="national-dropdown">
+			        </div>
+			    </div> 
+			    <div id='signupblurb'>
+					<div id="text">
+					Welcome to UPolitical! We give you a voice in political debates. Sign up if you aren't already a member, and start contributing today!
+					</div>
+					<a id='signupbutton' href="#openModal" class="btn btn-big">
+						Sign Up
+					</a>
+  
+				</div>
+			</nav>
+			<div id='body'>
+			    <div id="leftsection">
+			    	<ul id="sidetopics">
+			    		<li><a title="Trending" >
+			    			<div id="mainhead">Should we legalize gay marriage?
+			    			</div>
+			    			</a></li>
+			            <li><a title="International" >
+			            	<div id="mainhead"> Should we bring back city controllers?
+							</div>
+			            	</a></li>
+			            <li><a title="National" >
+			            	<div id="mainhead"> What should we do to fight Ebola?
+			            	</div>
+			            	</a></li>
+			            <li><a title="Provincial">
+			            	<div id="mainhead"> Should violent video games be banned?
+			            	</div>
+			            	</a></li>
+			    	</ul>
+			    </div>
+			
+				<div id="middlesection"> 
+					<ul id="maintopics">
+						<li> 
+							<a id='header' href="./Issue%20Page.html"> 
+								<div id="mainhead">
+									Should vaccination be mandatory? 
+								</div>
+								<img src="http://www.ou.org/jewish_action/files/vaccine.jpg" alt="Mountain View"></img>
+							</a>
+							
+						</li>
+						<li> 
+							<a id='header'> 
+								<div id="mainhead"> Should we invade Lalaland? 
+								</div>
+								<img src="http://www.ou.org/jewish_action/files/vaccine.jpg" alt="Mountain View"></img>
+							</a>
+							
+						</li>
+					</ul> 
+				</div>
+
+				<div id="rightsection">
+			
+				</div>
+			</div>
+			<div class='container'>
+			   
+				<div ui-view></div>
+
+			</div>
+		</div>
+	</body>
+</html>
