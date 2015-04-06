@@ -12,21 +12,25 @@
                      </ul>
                 </li>
              -->
-                <li class="parent"><a class="white" id="London" ui-sref="london" >London</a></li>
+                <li class="parent"><a class="white" id="London" ui-sref="london" >London {{query}} </a></li>
                 <li class="parent"><a class="white" id="Bridgewater" ui-sref="bridgewater" >Bridgewater</a></li> 
             </ul>
             <div id="national-dropdown">
             </div>
             <div id="searchbutton-holder">
                 <fieldset id="searchactions">
+
                     <div id="searchholder">
-                        <input id="search" class="input" type="search" name="Search" placeholder="Search" required>
+                        <input id="search" class="input" type="search" ng-model="query" name="Search" placeholder="Search" required>
                     </div>
                     <div id="searchsubmitholder">
                         <input type="submit" id="searchsubmit" value ="GO">
                     </div>
                 </fieldset>
             </div>
+
+
+
 
 
 <!--    {% if g.user %}    -->
@@ -41,40 +45,17 @@
 
 
 <div id="loginbox">
-  <div ng-show="error" class="alert alert-danger">{{error}}</div>
-    <form name="form" ng-submit="login()" role="form">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <i class="fa fa-key"></i>
-            <input type="email" name="email" id="email" class="form-control" ng-model="email" required />
-            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <i class="fa fa-lock"></i>
-            <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
-            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-        </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">Login</button>
-        </div>
-    </form>
-  </div>
+ <form name="loginForm" ng-controller="LoginController"
+      ng-submit="login(credentials)" novalidate>
+  <label for="username">Username:</label>
+  <input type="text" id="username"
+         ng-model="credentials.username">
+  <label for="password">Password:</label>
+  <input type="password" id="password"
+         ng-model="credentials.password">
+  <button type="submit">Login</button>
+</form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!--       
             <div id="loginbox"> 
