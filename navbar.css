@@ -13,7 +13,7 @@ body{
     bottom:0;
 }
 
-ul#navigation {
+ul#navigation{
 	z-index: 9999;
 	top:0px;
 	left:0px;
@@ -36,7 +36,7 @@ ul#navigation {
 }
 
 
-ul#navigation li {
+ul#navigation li{
     display: inline;
     float: left;
     margin-right: .75em;
@@ -120,7 +120,7 @@ ul#navigation li.last {
 }
 
 #navigation .active a{
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.2);
 	cursor: default !important;
 }
 
@@ -132,8 +132,8 @@ ul#navigation li.last {
 #navigation .logo a{
 	background: #222222;
 	color: white;
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
 	padding-bottom: 15px;
 }
 
@@ -278,7 +278,7 @@ ul#navigation li.last {
 	background: rgba(255,255,255,0.3);
 }
 
-@media (max-width: 459px){
+@media screen and (max-width: 459px){
 
 	#reveal{
 		display: block;
@@ -287,8 +287,8 @@ ul#navigation li.last {
 	}
 
 	#navigation .logo a{
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 8px;
+		padding-right: 8px;
 	}
 
 	#reveal:hover{
@@ -302,6 +302,7 @@ ul#navigation li.last {
 	#navigation .parent a {
 		display: none;
 	}
+
 	#navigation ul.submenu a{
 		padding: 0px;
 	}
@@ -330,12 +331,13 @@ ul#navigation li.last {
 	}
 	
 	#search{
-		width:100px;
+		width:20vw;
 	}
 
 	#navigation .parent a {
 		display: none;
 	}
+
 	#navigation ul.submenu a{
 		padding: 0px;
 	}
@@ -363,6 +365,10 @@ ul#navigation li.last {
     outline: 0;
 	}
 
+	#small-menu, #small-login{
+		display: none;
+	}
+
 }
 
 @media (max-width: 953px) and (min-width: 856px) { 
@@ -380,6 +386,10 @@ ul#navigation li.last {
 
 	textarea:focus, input:focus{
     outline: 0;
+	}
+
+	#small-menu, #small-login{
+		display: none;
 	}
 }
 
@@ -399,6 +409,10 @@ ul#navigation li.last {
 	textarea:focus, input:focus{
     outline: 0;
 	}
+
+	#small-menu, #small-login{
+		display: none;
+	}
 }
 
 @media (min-width: 1100px) { 
@@ -416,6 +430,10 @@ ul#navigation li.last {
 
 	textarea:focus, input:focus{
     outline: 0;
+	}
+
+	#small-menu, #small-login{
+		display: none;
 	}
 }
 
@@ -448,19 +466,96 @@ a{
 	color: white;
 }
 
-#loginbox form{
-	z-index: 9999;
-	position: fixed;
-	display: block;
-	width: 200px;
-	height: 80px;
-	top: 50px;
-	right: 30px;
-	background-color: red;
-	padding: 20px;
-	border-radius: 5px;
+/** Login box **/
+
+#loginbox{
+	display: none;
 }
 
+#loginbox form{
+	z-index: 9998;
+	position: fixed;
+	width: 210px;
+	top: 48px;
+	right: 0px;
+	color: white;
+	background-color: #666666;
+	padding: 20px;
+	border-radius: 0,0,5px, 5px;
+
+	-webkit-transition-duration: 0.5s; /* Safari */
+    transition-duration: 0.5s;
+}
+
+#loginfieldwrap{
+	width: auto;
+	float: left;
+}
+
+#inputwrap{
+	padding-bottom: 10px;
+}
+
+#loginsubmitholder{
+	position: relative;
+	float: right;
+	top: 29px;
+}
+
+#loginsubmit{
+	color: white;
+	border: 3px solid white;
+	border-radius: 200px;
+	width: 60px;
+	padding: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+#loginsubmit:hover{
+	color: #cccccc;
+	border: solid #cccccc;
+	cursor: pointer;
+}
+
+/** Login box ends **/
+
+
+/** Small Menu **/
+
+#small-menu{
+	z-index: 9998;
+	width: 100vw;
+	height: 48px;
+	background-color: rgba(50,50,50,0.8);
+	position: fixed;
+	top: 48px;
+
+	-webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+}
+
+ul#small-list li{
+    display: inline;
+    float: right;
+    margin-right: .75em;
+    list-style: none;
+    margin:0;
+    font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: -10px;
+}
+
+ul#small-list a{
+	padding-left: 0;
+	padding-right: 12vw;
+}
+
+ul#small-list a:hover{
+	cursor: pointer;
+}
 
 
 

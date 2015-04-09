@@ -1,0 +1,41 @@
+<div ng-repeat="actionplan in main">
+
+	<div id="upperwrapper">
+	<div id="actionplanmain"> 
+		<div id="plan">
+			<h2>{{actionplan.plan}}</h2>
+		</div>
+		<div id="more-info">
+			<h3> More Info </h3>
+			<div id="actionplan-content">
+				{{actionplan.article}}
+			</div>
+		</div>
+		<div id="vote-holder">
+			<div id="vote_for_action_plan">
+				Vote
+			</div>
+		</div>
+	</div>
+	</div>
+	
+	<div id = "pro-con-wrapper">
+		<div class="col-1-2">
+			<div id="listwrap">
+			<h3>Pros</h3>
+			</div>
+		</div>
+		<div class="col-1-2">
+			<div id="listwrap">
+			<h3>Cons</h3>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="commentsection">
+			<div id="title">
+				<h2>Comments</h2>
+			</div>
+	</div>
+</div>

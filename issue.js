@@ -2,26 +2,230 @@
   "issue": [
     {
       "action_plan_id": [
-        "All vaccines should be banned", 
-        "All vaccines should be allowed"
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 10
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 100
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 30
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 2
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 30
+        }
+      ], 
+      "author_id": "Bob Marley", 
+      "community_id": 1, 
+      "id": 3, 
+      "importance_count": 0, 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "info info info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "Should vaccines be mandatory for all children?", 
+      "views": 0
+    },
+    {
+      "action_plan_id": [
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        }
       ], 
       "author_id": 1, 
       "community_id": 1, 
-      "id": 2, 
+      "id": 4, 
       "importance_count": 0, 
-      "info": "Some parents are strongly opposed to the thought of having their children vaccinated, because they fear that vaccination causes autism", 
-      "title": "Should all children be vaccinated?", 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "inf info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "title title title title title title title title title title title title ", 
       "views": 0
-    }, 
-    {
-      "action_plan_id": [], 
+    },
+        {
+      "action_plan_id": [
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        }
+      ], 
       "author_id": 1, 
       "community_id": 1, 
       "id": 3, 
       "importance_count": 0, 
-      "info": "Some argue that food trucks should not be allowed in London Ontario, bbecause London Ontario is the home of a vibrant restaurant culture. The presence of food trucks would disturb this pre-existing delicate ecosystem that is already in place. Restaurant owners who pay rent for a place in the downtown area would be negatively affected by the people in the space. This is not good. However, when you do allow food trucks, this might attract more people to come to the downtown area, because food trucks offer more variety. The presence of food trucks also mean that people who do not have the initial capital to afford to buy a restaurant can start off their business in their way.", 
-      "title": "Should food trucks be allowed in London?", 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "info info info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "Should vaccines be mandatory for all children?", 
+      "views": 0
+    },
+    {
+      "action_plan_id": [
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        }
+      ], 
+      "author_id": 1, 
+      "community_id": 1, 
+      "id": 3, 
+      "importance_count": 0, 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "inf info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "title title title title title title title title title title title title ", 
+      "views": 0
+    },
+        {
+      "action_plan_id": [
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        }
+      ], 
+      "author_id": 1, 
+      "community_id": 1, 
+      "id": 3, 
+      "importance_count": 0, 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "info info info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "Should vaccines be mandatory for all children?", 
+      "views": 0
+    },
+    {
+      "action_plan_id": [
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        },
+        {
+          "author_id": 1, 
+          "cons": "more disease", 
+          "id": 1, 
+          "issue_id": 3, 
+          "plan": "All vaccines should be banned", 
+          "pros": "Less trauma", 
+          "votes": 0
+        }
+      ], 
+      "author_id": 1, 
+      "community_id": 1, 
+      "id": 3, 
+      "importance_count": 0, 
+       "picture": "https://fellixlyu1.files.wordpress.com/2015/03/vaccines-2.jpg",
+      "info": "inf info infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo infoinfo info", 
+      "title": "title title title title title title title title title title title title ", 
       "views": 0
     }
   ]
 }
+     
+      

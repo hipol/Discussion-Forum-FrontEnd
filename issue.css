@@ -1,0 +1,247 @@
+
+#issue{
+	height:auto;
+	font-size: 20px;
+	margin-left: 10%;
+	width: 80%;
+	top: 30px;
+	position: relative;
+	left: 0;
+	background: #128888;
+	border: 3px solid #bbbbbb;
+	border-radius: 14px;
+	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	z-index:999;
+}
+
+#title h2{
+	text-align: center;
+	padding: 10px;
+	padding-top: 20px;
+	font-size:40px;
+}
+
+#background h3{
+	font-size:20px;
+	font-weight: normal;
+}
+
+#backgroundcontent {
+	font-size:15px;
+}
+
+#background{
+	padding: 30px;
+	padding-top: 0px;
+	color: #ffffff;
+}
+
+#actionplangrid{
+	width: 100%;
+	position: relative;
+	display: table;
+	clear: both;
+	margin-top:70px;
+	z-index:999;
+}
+
+.col-1-3 {
+  width: 29.2%;
+  height: 290px;
+  margin: 2%;
+  border-radius: 5px;
+}
+	
+.col-1-3:nth-child(6n+1) {
+  background: #2980b9;
+}
+
+.col-1-3:nth-child(6n+1):hover {
+  background: #3498db;
+}
+
+.col-1-3:nth-child(6n+2) {
+  background: #f39c12;
+}
+
+.col-1-3:nth-child(6n+2):hover {
+  background: #f1c40f;
+}
+
+.col-1-3:nth-child(6n+3) {
+  background: #27ae60;
+}
+
+.col-1-3:nth-child(6n+3):hover {
+  background: #2ecc71;
+}
+
+.col-1-3:nth-child(6n+4) {
+  background: #8e44ad;
+}
+
+.col-1-3:nth-child(6n+4):hover {
+  background: #9b59b6;
+}
+
+.col-1-3:nth-child(6n+5) {
+  background: #c0392b;
+}
+
+.col-1-3:nth-child(6n+5):hover {
+  background: #e74c3c;
+}
+
+.col-1-3:nth-child(6n+6) {
+  background: #16a085;
+}
+
+.col-1-3:nth-child(6n+6):hover {
+  background: #1abc9c;
+}
+
+.col-lastplan{
+  width: 29.2%;
+  height: 290px;
+  margin: 2%;
+  border-radius: 5px;
+  background: #bdc3c7;
+  font-size:30px;
+  font-weight: bold;
+  font-family: Arial;
+  text-decoration: none;
+}
+
+.col-lastplan:hover {
+  background: #ecf0f1;
+  cursor: pointer;
+}
+
+
+[class*='col-'] {
+  float: left;
+}
+
+#proposeactions{
+	border:none;
+	padding-top:5px;
+}
+
+#proposesubmit{
+	position:absolute;
+	top:91%;
+	left:39.3%;
+
+	height:5vh;
+	/* Rectangle 4: */
+	width: 200px;
+/* Rectangle 4: */
+background: #FFFF94;
+border: 2px solid #DCDCDC;
+border-radius: 8px;
+font-family: Arial;
+font-size: 15px;
+font-style: bold;
+}
+
+#proposebutton{
+	top:20px;
+	left:auto;
+	line-height: 40px;
+	font-size: 50px;
+	position:relative;
+    color: #444;
+  	text-shadow: 0 1px 0 #fff; 
+  	background-color: yellow;
+  	border-style: solid;
+    border-width: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-radius:50px;
+    text-decoration: none;
+    padding: 30px;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+#actionplan{
+	height:290px;
+	position:relative;
+	text-decoration: none;
+	font-family:Arial;
+	color: white;
+	text-align: left;
+	padding: 10px;
+	padding-left:0px;
+	border-left:10px;
+}
+
+#proposalBlock{
+	height:250px;
+	width:270px;
+	position:absolute;
+	text-align: center;
+}
+
+h4{
+	text-align: left;
+	text-decoration: none;
+	padding-top:20px;
+}
+
+h2{
+	text-align: left;
+	text-decoration: none;
+}
+
+#actionplan h2{
+	font-size: 30px;
+}
+
+#actionplan h4{
+	padding-top:0;
+	padding-bottom:0;
+	margin:0;
+	padding-left:20px;
+}
+
+#action_plan_votes{
+	padding: 20px;
+	background-color: black;
+	text-align: right;
+	color: white;
+	position: relative;
+	top: 23.5%;
+}
+
+#addactionplan{
+	text-decoration: none;
+	color:#2c3e50;
+	text-align: center;
+	height: 250px;
+	position: relative;
+}
+
+#addactionplan h4{
+	text-align: center;
+	margin:0;
+	margin-top:60px;
+}
+
+#addactionplan h3{
+	text-align: center;
+	margin-top:20px;
+}
+
+
+#background{
+	padding-top: 10px;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 0px 0px 14px 14px;
+
+}
+
+#actionplanchoose:hover{
+	cursor: pointer;
+}
+

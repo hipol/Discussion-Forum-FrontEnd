@@ -1,8 +1,17 @@
 <!-- NAVIGATION -->
 <div id="MenuContainer">
-            <ul id="navigation">
-                <li class="logo"><a id="Logo" ui-sref="home">UPolitical</a></li>
-                <li class="active"><a class="white" id="Trending" ui-sref="trending" >Trending</a></li>
+
+  <div id="small-menu">
+    <ul id="small-list">
+      <li class="small" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending">Trending</a></li>
+      <li class="small" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+      <li class="small" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li> 
+    </ul>
+  </div>
+
+     <ul id="navigation">
+                <li class="logo" ui-sref="home" ui-sref-active="active"><a id="Logo" >TownSquare</a></li>
+                  <li class="parent" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending"  >Trending</a></li>
            <!--     <li class="parent"><a class="white" id="National" href="#" >National</a></li>
                 <li class="parent"><a class="white" id="Provincial" href="#" >Provincial</a></li> 
                 <li class="parent"id="Local"><a class="white" href="#" >Local</a>
@@ -10,13 +19,15 @@
                         <li> <a href="#">London</a> </li>
                         <li> <a href="#">Halifax</a> </li>
                      </ul>
-                </li>
-             -->
-                <li class="parent"><a class="white" id="London" ui-sref="london" >London {{query}} </a></li>
-                <li class="parent"><a class="white" id="Bridgewater" ui-sref="bridgewater" >Bridgewater</a></li> 
+                </li>   -->
+            
+                <li class="parent" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+                <li class="parent" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li>
+
             </ul>
             <div id="national-dropdown">
             </div>
+
             <div id="searchbutton-holder">
                 <fieldset id="searchactions">
 
@@ -34,9 +45,9 @@
 
 
 <!--    {% if g.user %}    -->
-    <div id="login"> <a id="login-click" href="/logout"> Logout </a> </div>
+<!--    <div id="login"> <a id="login-click" href="/logout"> Logout </a> </div>    -->
 <!--    {% else %}    -->
-    <div id="login"> <a id="login-click" href="#"> Login </a> </div>
+    <div id="login" > <a id="login-click" onclick="openLogin()"> Login </a> </div>
 <!--    {% endif %}      -->
 
 
@@ -44,34 +55,28 @@
 
 
 
-<div id="loginbox">
+<div id="loginbox" >
  <form name="loginForm" ng-controller="LoginController"
       ng-submit="login(credentials)" novalidate>
-  <label for="username">Username:</label>
-  <input type="text" id="username"
-         ng-model="credentials.username">
-  <label for="password">Password:</label>
-  <input type="password" id="password"
-         ng-model="credentials.password">
-  <button type="submit">Login</button>
+  <div id="loginfieldwrap">
+    <div id="inputwrap">
+      <label for="email">Email:</label><br>
+      <input type="text" id="email"
+             ng-model="credentials.email"><br>
+    </div>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password"
+             ng-model="credentials.password">
+  </div>
+  <div id="loginsubmitholder">
+    <div id="loginsubmit" type="submit"> Go! </div>
+  </div>
 </form>
 </div>
 
-<!--       
-            <div id="loginbox"> 
-                <form id="login-form" action="/login"method="post">
-                  <fieldset id="inputs">
-                    <input id="username" type="email" name="email" placeholder="Your email address" required>   
-                    <input id="password" type="password" name="password" placeholder="Password" required>
-                  </fieldset>
-                  <div id="button-holder">
-                    <fieldset id="actions">
-                        <input type="submit" id="submit" value ="Log in">
-                    </fieldset>
-                  </div>
-                </form>
-            </div>
--->
+
+
+
 
 <!--            <div id='error'>
                 {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
@@ -88,9 +93,11 @@
   {% endwith %}
 
 -->
-            </div>
+
+</div>
             <div id="myaccount" href="#"> My Account </div>
-            <div id="reveal"> 
+            <div id="reveal" onclick="revealMenu()"> 
                 <img src="assets/img/horizontalbars.png" class="bars" id="revealbars">
             </div>
-        </div> 
+
+

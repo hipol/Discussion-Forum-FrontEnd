@@ -1,0 +1,70 @@
+.inputloginhome{
+	width:12%;
+	min-width: 230px;
+	height:15px;
+	padding-left:20px;
+	padding-right:20px;
+	margin-bottom:15px;
+	border: 3px solid white;
+	font-size: 13px;
+	border-radius: 20px;
+	padding-top:0;
+}
+
+#bgoverlay{
+	background-color: rgba(0,0,0,0.8);
+
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  right: 0;
+
+}
+
+h1{
+	color: white;
+	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 100px;
+	font-weight: normal;
+}
+
+#landing{
+	font-style: italic;
+}
+
+#landing-wrap{
+	position: fixed;
+	text-align: center;
+	min-width: 350px;
+	max-height: 90vh;
+	height:auto;
+	font-size: 20px;
+	top: 80px;
+	position: relative;
+	border-radius: 14px;
+	z-index:999;
+	color: white;
+
+	/*float: left;
+	width: 40%;*/
+}
+
+#landing-wrap h2{
+	font-size: 30px;
+}
+
+#landingimg{
+	position: fixed;
+}
+
+#or{
+	padding-top: 15px;
+	padding-bottom: 5px;
+}

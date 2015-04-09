@@ -1,16 +1,21 @@
-@font-face { font-family: "glober"; src: url('Glober Thin Free.otf'); } 
+/* @font-face { font-family: "glober"; src: url('Glober Thin Free.otf'); } 
 @font-face { font-family: "glober"; font-weight: bold; src: url('Glober SemiBold Free.otf'); } 
-
+*/
 
 #issue_container{
 	width: 600px;
 	margin: 40px;
 	margin-right: auto;
     margin-left: auto;
-	font-family: "glober","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#issue_container:hover{
+	cursor: pointer;
 }
 
 #title_container{
+	background-color: #cfe8e3;
 	background-color: #cfe8e3;
 	border-radius: 10px 10px 0px 0px ;
 	padding: 10px;
@@ -21,18 +26,75 @@
 #issue_title{
 	font-size: 30px;
 	padding: 10px;
-	font-weight: bold;
+	font-weight: normal;
 	text-transform: capitalize;
-	text-decoration: underline;
 }
 
-#extra_container{
+#action_plan_container{
+	width:600px;
+
+}
+
+#aplan{
 	position: relative;
 	height: 100%;
 	right:0;
-	width:400px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: auto;
+	color: white;
+
 	background-color: #0b5647;
-	border-radius: 0px 0px 10px 10px;
-	border-radius: 0px 10px 10px 0px ;
+}
+
+#picture{
+	width: 300px;
+}
+
+#aplan:nth-child(6n+1) {
+  background: #c0392b;
+}
+
+#aplan:nth-child(6n+2) {
+	 background: #8e44ad;
+  
+}
+
+#aplan:nth-child(6n+3) {
+   background: #16a085;
+ 
+}
+
+#aplan:nth-child(6n+4) {
+ background: #f39c12;
+}
+
+#aplan:nth-child(6n+5) {
+  background: #2980b9;
+}
+
+#aplan:nth-child(6n+6) {
+   background: #27ae60;
+}
+
+#aplan_votes{
+	float: right;
+}
+
+#asked_by{
+	position: relative;
+	height: 100%;
+	text-align: right;
+	right:0;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: auto;
+	color: white;
+
+	background-color: #555555;
 }
 

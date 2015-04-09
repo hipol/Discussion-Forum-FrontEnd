@@ -1,7 +1,6 @@
 html{
   overflow-x: hidden;
 }
-
 /** Start of Background Image **/
 
 img.bg {
@@ -38,7 +37,7 @@ img.bg {
 }
 
 
-@media (max-width: 799px){
+@media (max-width: 819px){
 	#bgmask {
 	  background-color: rgba(0,0,0,0.7);
 	}
@@ -49,7 +48,7 @@ img.bg {
 
 
 body{
-	font-family: "brandon-grotesque","Brandon Grotesque","Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 
@@ -57,7 +56,6 @@ body{
 
 #signup-wrap{
 	position: relative;
-	top: 0px;
 	text-align: center;
 	width: 40%;
 	min-width: 350px;
@@ -65,22 +63,21 @@ body{
 	margin-left: 13%;
 	height:auto;
 	font-size: 20px;
-	top: 30px;
+	top: 80px;
 	position: relative;
 	border-radius: 14px;
 	z-index:999;
-
-	transition-duration: 1s;
 
 	/*float: left;
 	width: 40%;*/
 }
 
-@media (max-width: 799px){
+@media (max-width: 819px){
 	#signup-wrap{
 		display: block;
 		margin: auto;
 		margin-left: auto;
+		top: 128px;
 	}
 }
 
@@ -113,7 +110,7 @@ h2{
 	padding-right:20px;
 	margin-bottom:18px;
 	border: 3px solid white;
-	font-size: 10px;
+	font-size: 13px;
 	border-radius: 20px;
 	padding-top:0;
 }
@@ -127,6 +124,8 @@ h2{
 }
 
 #signupactions{
+	position: relative;
+	top: 30px;
 	border:none;
 	text-align: center;
 }

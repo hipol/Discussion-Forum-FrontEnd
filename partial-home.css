@@ -9,7 +9,7 @@
 	display: block;
 	min-height: 100vh !important;
 
-	z-index: 9998;
+	z-index: 9997;
 
 }
 
@@ -22,20 +22,22 @@
 	display: block;
 	min-height: 100vh !important;
 	margin-right: 250px;
+
+	-webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
 }
 
-
-@media (min-width:300px) and (max-width: 800px) { 
-
-	#sidebar{
-		display: none;
+@media (max-width: 857px) {
+	#mainview{
+		margin-right: 0px;
+		position: relative;
+		top: 96px;
+		width: auto;
 	}
 
-	#mainview{
-	margin-right: 0px;
+		#sidebar{
+		display: none;
+	}
 }
-
-}
-
 
 
