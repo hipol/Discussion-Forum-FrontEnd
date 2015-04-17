@@ -2,6 +2,8 @@
 	color: black;
 	font-size: 30px;
 	text-align: left;	
+	font-weight:normal;
+
 }
 
 #SignUpSide {
@@ -39,6 +41,6 @@
 	padding:20px;
 	text-align: center;
 	padding: 20px;
-	background-color: #f5f5f5;
+	background-color: #E8F4F4;
 	height: 100vh;
 }

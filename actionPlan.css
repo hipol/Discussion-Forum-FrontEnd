@@ -7,13 +7,11 @@
 #actionplanmain{
 	height:auto;
 	font-size: 20px;
-	margin-left: 17.5%;
-	width: 65%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
 	position: relative;
 	left: 0;
-	background: #992277;
-	border: 3px solid #bbbbbb;
-	border-radius: 14px 14px 0px 0px;
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 	z-index:999;
 }
@@ -23,6 +21,7 @@
 	padding: 10px;
 	padding-top: 20px;
 	font-size:40px;
+	color: #333333;
 }
 
 #moreinfo h3{

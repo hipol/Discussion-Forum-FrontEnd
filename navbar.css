@@ -29,9 +29,9 @@ ul#navigation{
  	bottom: 0;
  	width: 105%;
 	text-decoration: none;
-	background: #16a085;
+	background: #17A0A0;
 
-	background-image: linear-gradient(to bottom, #16a085, #139077);
+	background-image: linear-gradient(to bottom, #17A0A0, #0F8D8D);
  	border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
@@ -530,7 +530,7 @@ a{
 	height: 48px;
 	background-color: rgba(50,50,50,0.8);
 	position: fixed;
-	top: 48px;
+	top: 46px;
 
 	-webkit-transition-duration: 0.3s; /* Safari */
     transition-duration: 0.3s;
@@ -545,16 +545,28 @@ ul#small-list li{
     font-family: "Century Gothic",'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
     font-size: 17px;
     font-weight: normal;
-    line-height: -10px;
 }
 
 ul#small-list a{
-	padding-left: 0;
-	padding-right: 12vw;
+	padding-left: 6vw;
+	padding-right: 6vw;
+	padding-top: 13px;
+	padding-bottom: 11px;
+
 }
 
 ul#small-list a:hover{
 	cursor: pointer;
+}
+
+#small-list .active a{
+	background-color: rgba(0,0,0,0.2);
+	cursor: default !important;
+}
+
+#small-list .active{
+	color: #ecf0f1;
+	cursor: default !important;
 }
 
 

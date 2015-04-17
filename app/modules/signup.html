@@ -1,26 +1,22 @@
 <img src="assets/img/jfk_large_02.jpg" class="bg">
 <div id="bgmask"></div>
 <div id = 'signup-wrap'>
-	<h2>Sign Up</h2>
+	<h2 id="signup">Sign Up</h2>
     <form id="signup-form" method="post">
       <fieldset id="signup-fields">
       	<input id="firstname" class="input" type="firstnmame" name="first_name" placeholder="First Name" required>
       	<br>
       	<input id="lastname" type="lastnmame" name="last_name" placeholder="Last Name" required>
       	<br>
-      	<input id="city" class="input"  type="city" name="city" placeholder="City" required>
+        <input id="postalcode" class="input"  type="postalcode" name="postalcode" placeholder="Postal Code" required>
         <br>
-      	<input id="state/province" class="input"  type="state/province" name="state" placeholder="State or Province" required>
-        <br>
-        <input id="country" class="input"  type="country" name="country" placeholder="Country" required>
-        <br>
-        <input id="email" class="input"  type="email" name="email" placeholder="Email Address" required>   
+        <input id="email" class="input"  type="email" name="email" placeholder="Email Address" required> 
         <br>
         <input id="password" class="input"  type="password" name="password" placeholder="Password" required>
       </fieldset>
       <div id="signupbutton-holder">
      	<fieldset id="signupactions">
-      		<input type="submit" id="signupsubmit" value ="Register">
+      		<input type="submit" id="signupsubmit" ng-click="signUp()" value ="Register">
     	</fieldset>
       </div>
     </form>

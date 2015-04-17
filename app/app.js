@@ -36,7 +36,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'createActionPlan.html',
                     controller: 'createActionPlanCtrl'
                 }
-            },  
+            }
+
+
+/*
+            ,  
             resolve: {
                 auth: ["$q", "authenticationSvc", function($q, authenticationSvc) {
                   var userInfo = authenticationSvc.getUserInfo();
@@ -48,6 +52,9 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                   }
                 }]
               }
+
+*/
+
         })
         .state('actionplan', {
             url: '/issue/:issue_id/actionplan/:action_plan_id',
@@ -138,24 +145,93 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
          
 });
 
+routerApp.config(['$httpProvider', function ($httpProvider) {    
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+}]);
+
 
 
 routerApp.controller('communityCtrl', function($scope, $http) {
-    $http.get('issue.js')
+
+    $http.get('https://dry-earth-2683.herokuapp.com/issue')
     .success(function(response) 
         {
-          $scope.main= response.issue;
+           $scope.main= response.issue;
         });
 
 });
 
 routerApp.controller('navBarCtrl', function($scope, $http) {
 
+    $scope.openLogin = function () {
+    var x = document.getElementById("loginbox");
+    var x2 = document.getElementById("loginbox");
+    var y = document.getElementById("SignUpSide"); 
+    var window_width = window.innerWidth;
+
+        if (x.style.display == "block") {
+            x.style.display = "none";
+            y.style.top = "18vh";
+        } 
+        else{  
+            x.style.display = "block"; 
+            y.style.top = "27vh";
+        }
+
+    }
+
 });
 
-routerApp.controller('signUpCtrl', function($scope, $http) {
+routerApp.controller('signUpCtrl', function($scope, $http, $state) {
+
+    var form_firstname= document.getElementById("first_name").value;
+    var form_lastname= document.getElementById("last_name").value;
+    var form_postalcode= document.getElementById("postalcode").value;
+    var form_email= document.getElementById("email").value;
+    var form_password= document.getElementById("password").value;
+
+    var new_user= {email: form_email, first_name:form_firstname, last_name:form_lastname, password:form_password, postal_code:form_postalcode};
+
+    $http.post('https://dry-earth-2683.herokuapp.com/auth/signup', JSON.stringify(new_user));
+
+    $scope.signUp = function () {
+
+        var x = document.getElementById("loginbox");
+        var x2 = document.getElementById("loginbox");
+        var y = document.getElementById("SignUpSide"); 
+        var window_width = window.innerWidth;
+
+        if (x.style.display == "block") {
+            x.style.display = "none";
+            y.style.top = "18vh";
+        } 
+        else{  
+            x.style.display = "block"; 
+            y.style.top = "27vh";
+        }
+
+        
+
+
+        
+
+        $state.go('trending');
+    }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 routerApp.controller('actionPlanCtrl', function($scope, $http) {
     $http.get('issue3.js')
@@ -183,29 +259,21 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams) {
 });
 
 
-function openLogin() {
-    var x = document.getElementById("loginbox");
-    var x2 = document.getElementById("loginbox");
-    var y = document.getElementById("SignUpSide"); 
-    var window_width = window.innerWidth;
 
-    if (x.style.display == "block") {
-        x.style.display = "none";
-        y.style.top = "18vh";
-    } 
-    else{  
-        x.style.display = "block"; 
-        y.style.top = "27vh";
-    }
-  
-}
+
+
+
+
+
+
+
 
 function revealMenu() {
     var x = document.getElementById("small-menu");
     var y = document.getElementById("mainview"); 
     var z = document.getElementById("signup-wrap"); 
     if (x.style.top == "0px") {
-        x.style.top = "48px";
+        x.style.top = "46px";
         y.style.top = "96px";
         z.style.top = "128px";
     } 

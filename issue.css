@@ -1,115 +1,78 @@
 
+#upperwrapper{
+	width:70%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 #issue{
 	height:auto;
 	font-size: 20px;
-	margin-left: 10%;
-	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
 	top: 30px;
 	position: relative;
 	left: 0;
-	background: #128888;
-	border: 3px solid #bbbbbb;
-	border-radius: 14px;
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 	z-index:999;
+	color: #333333;
+	text-align: justify; 
 }
 
-#title h2{
-	text-align: center;
-	padding: 10px;
+#title{
+	font-weight: bold;
+	text-align: left;
 	padding-top: 20px;
 	font-size:40px;
+	color: #333333;
+	text-align: center;
+	width: 100%;
 }
 
 #background h3{
 	font-size:20px;
-	font-weight: normal;
+	font-weight: bold;
 }
 
 #backgroundcontent {
 	font-size:15px;
 }
 
-#background{
-	padding: 30px;
-	padding-top: 0px;
-	color: #ffffff;
-}
-
-#actionplangrid{
-	width: 100%;
+#actionplan_container{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
 	position: relative;
-	display: table;
-	clear: both;
-	margin-top:70px;
-	z-index:999;
+	margin-bottom: 30px;
 }
 
 .col-1-3 {
   width: 29.2%;
-  height: 290px;
+  height: 240px;
   margin: 2%;
   border-radius: 5px;
-}
-	
-.col-1-3:nth-child(6n+1) {
-  background: #2980b9;
+  background-color: #CDF0F0;
 }
 
-.col-1-3:nth-child(6n+1):hover {
-  background: #3498db;
-}
-
-.col-1-3:nth-child(6n+2) {
-  background: #f39c12;
-}
-
-.col-1-3:nth-child(6n+2):hover {
-  background: #f1c40f;
-}
-
-.col-1-3:nth-child(6n+3) {
-  background: #27ae60;
-}
-
-.col-1-3:nth-child(6n+3):hover {
-  background: #2ecc71;
-}
-
-.col-1-3:nth-child(6n+4) {
-  background: #8e44ad;
-}
-
-.col-1-3:nth-child(6n+4):hover {
-  background: #9b59b6;
-}
-
-.col-1-3:nth-child(6n+5) {
-  background: #c0392b;
-}
-
-.col-1-3:nth-child(6n+5):hover {
-  background: #e74c3c;
-}
-
-.col-1-3:nth-child(6n+6) {
-  background: #16a085;
-}
-
-.col-1-3:nth-child(6n+6):hover {
-  background: #1abc9c;
+.col-1-3:hover {
+  width: 29.2%;
+  height: 240px;
+  margin: 2%;
+  border-radius: 5px;
+  background-color: #DEFFFF;
 }
 
 .col-lastplan{
   width: 29.2%;
-  height: 290px;
+  height: 240px;
   margin: 2%;
   border-radius: 5px;
-  background: #bdc3c7;
   font-size:30px;
   font-weight: bold;
   font-family: Arial;
   text-decoration: none;
+  background-color: #F7F7F7;
 }
 
 .col-lastplan:hover {
@@ -169,7 +132,6 @@ font-style: bold;
 	position:relative;
 	text-decoration: none;
 	font-family:Arial;
-	color: white;
 	text-align: left;
 	padding: 10px;
 	padding-left:0px;
@@ -196,6 +158,11 @@ h2{
 
 #actionplan h2{
 	font-size: 30px;
+	color: #333333;
+	margin-bottom: 20px;
+	padding-top: 0px;
+	font-weight:normal;
+	text-align: center;
 }
 
 #actionplan h4{
@@ -203,6 +170,7 @@ h2{
 	padding-bottom:0;
 	margin:0;
 	padding-left:20px;
+	color: #333333;
 }
 
 #action_plan_votes{
@@ -210,8 +178,8 @@ h2{
 	background-color: black;
 	text-align: right;
 	color: white;
+	bottom: 0px;
 	position: relative;
-	top: 23.5%;
 }
 
 #addactionplan{
@@ -222,22 +190,18 @@ h2{
 	position: relative;
 }
 
-#addactionplan h4{
-	text-align: center;
-	margin:0;
-	margin-top:60px;
-}
-
 #addactionplan h3{
 	text-align: center;
-	margin-top:20px;
+	margin-top: 50px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 
 #background{
-	padding-top: 10px;
-	background-color: rgba(0,0,0,0.4);
+	padding-top: 5px;
 	border-radius: 0px 0px 14px 14px;
+	padding-bottom: 30px;
 
 }
 

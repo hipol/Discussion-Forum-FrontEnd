@@ -83,7 +83,7 @@ body{
 
 /* Form */
 
-h2{
+#signup h2{
 
 
 	margin-top: 0px;
@@ -98,7 +98,6 @@ h2{
 
 #signup-fields{
 	text-align: center;
-	height: 270px;
 	border: none;
 }
 
@@ -125,7 +124,6 @@ h2{
 
 #signupactions{
 	position: relative;
-	top: 30px;
 	border:none;
 	text-align: center;
 }

@@ -2,81 +2,68 @@
 @font-face { font-family: "glober"; font-weight: bold; src: url('Glober SemiBold Free.otf'); } 
 */
 
-#issue_container{
+#topic_issue_container{
 	width: 600px;
-	margin: 40px;
+	margin-top: 70px;
 	margin-right: auto;
     margin-left: auto;
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-#issue_container:hover{
+#topic_issue_container:hover{
 	cursor: pointer;
 }
 
 #title_container{
-	background-color: #cfe8e3;
-	background-color: #cfe8e3;
 	border-radius: 10px 10px 0px 0px ;
-	padding: 10px;
-	text-align: center;
+	text-align: left;
 	height: auto;
 }
 
 #issue_title{
+	padding-top:10px;
+	text-align: justify;
 	font-size: 30px;
-	padding: 10px;
 	font-weight: normal;
 	text-transform: capitalize;
 }
 
-#action_plan_container{
-	width:600px;
-
+#issue_info_container{
+	padding-bottom: 10px;
 }
+
+.crop_text {
+	overflow:hidden;
+	max-height:120px;
+	height: auto;
+	text-align: justify;
+	}​
+
 
 #aplan{
 	position: relative;
 	height: 100%;
 	right:0;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding: 15px;
 	width: auto;
-	color: white;
+	color: #333333;
 
-	background-color: #0b5647;
+	/* Rectangle 5: */
 }
 
-#picture{
-	width: 300px;
+
+/* crops image */ 
+
+.crop {
+    width: 600px;
+    height: 200px;
+    overflow: hidden;
 }
 
-#aplan:nth-child(6n+1) {
-  background: #c0392b;
-}
-
-#aplan:nth-child(6n+2) {
-	 background: #8e44ad;
-  
-}
-
-#aplan:nth-child(6n+3) {
-   background: #16a085;
- 
-}
-
-#aplan:nth-child(6n+4) {
- background: #f39c12;
-}
-
-#aplan:nth-child(6n+5) {
-  background: #2980b9;
-}
-
-#aplan:nth-child(6n+6) {
-   background: #27ae60;
+.crop #picture {
+    width: 800px;
+    max-height: 600px;
+    margin: -75px 0 0 -100px;
 }
 
 #aplan_votes{
@@ -94,7 +81,37 @@
 	padding-bottom: 5px;
 	width: auto;
 	color: white;
-
-	background-color: #555555;
 }
 
+#action_plan_container{
+	width:70%;
+	background: #E7F1FF;
+	border-radius: 14px;
+	position: relative;
+	left:15%;
+	padding: 10px;
+	margin-top:10px;
+}
+
+hr {
+	position: relative;
+    display: block;
+    width: 30%;
+    left: 35%;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+#callaction{
+	text-align: center;
+	color: #872F70;
+}
+
+#call-to-action{
+	padding: 20px;
+	text-align: center;
+	color: #872F70;
+}

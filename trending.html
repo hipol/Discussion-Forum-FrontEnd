@@ -1,17 +1,25 @@
 
 
-<div id="issue_container" ng-repeat="issue in main">
-	<div id = "individual_container" ui-sref="issue({ issue_id: {{issue.id}} })">
-
-
-		<div id="title_container" >
-			
-			<div id="issue_title">
-
-				{{ issue.title}}						
-			</div>
+<div id="topic_issue_container" ng-repeat="issue in main">
+	<div id = "individual_container" ui-sref="issue({ issue_id: {{issue.id}} })">		
+		<div class="crop">
 			<img id = "picture" src="{{issue.picture}}" alt="Picture of {{issue.title}}"></img>
 		</div>
+		<div id="title_container">
+			<div id="issue_title">
+				{{ issue.title }}
+			</div>​
+		</div>
+		
+		<div id="issue_info_container">
+			<div class="crop_text">
+				{{ issue.info }}
+			</div>​
+			<div id="callaction">
+				Continue Reading...
+			</div>
+		</div>
+		
 		<div id="action_plan_container">
 			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id">
 					{{ actionplan.plan}}
@@ -21,10 +29,18 @@
 					</div>
 			</div>
 		</div>
-		<div id="asked_by">
+
+		<div id="call-to-action">
+			What do you think?
+		</div>
+<!--		<div id="asked_by">
 			Asked by {{issue.author_id}}
 		</div>
+
+-->
 	</div>
+
+	<hr/>
 </div>
 
 
