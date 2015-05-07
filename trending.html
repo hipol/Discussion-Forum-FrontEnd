@@ -3,7 +3,9 @@
 <div id="topic_issue_container" ng-repeat="issue in main">
 	<div id = "individual_container" ui-sref="issue({ issue_id: {{issue.id}} })">		
 		<div class="crop">
+			
 			<img id = "picture" src="{{issue.picture}}" alt="Picture of {{issue.title}}"></img>
+
 		</div>
 		<div id="title_container">
 			<div id="issue_title">
@@ -12,9 +14,7 @@
 		</div>
 		
 		<div id="issue_info_container">
-			<div class="crop_text">
-				{{ issue.info }}
-			</div>​
+			<div class="crop_text" ng-bind-html="issue.info | to_trusted"> </div>​
 			<div id="callaction">
 				Continue Reading...
 			</div>

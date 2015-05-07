@@ -16,9 +16,14 @@
 	z-index:999;
 }
 
+#actionplanmain a{
+	color: #555555;
+	text-decoration: underline;
+}
+
 #plan h2{
 	text-align: center;
-	padding: 10px;
+	margin-bottom: 0px;
 	padding-top: 20px;
 	font-size:40px;
 	color: #333333;
@@ -36,28 +41,30 @@
 #more-info{
 	padding: 30px;
 	padding-top: 0px;
-	color: #ffffff;
+	color: #333333;
 	padding-top: 10px;
-	background-color: rgba(0,0,0,0.4);
 }
 
 #vote-holder{
 	padding: 10px;
 	text-align: center;
+	width: 150px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 70px;
 	color: white;
 	font-weight: bold;
-	background-color: red;
+	background-color: #333333;
 }
 
 #vote-holder:hover{
-	padding: 10px;
-	background-color: green;
+	cursor: pointer;
 }
 
 #commentsection{
 	margin: auto;
 	position: relative;
-	width:40%;
+	width:60%;
 	height:auto; 
 	background: #ecf0f1;
 	border-style: solid;
@@ -66,8 +73,18 @@
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+#commentsection #title {
+	padding-top: 0;
+}
+
 #commentsection #title h2{
 	color: black;
+	font-size: 25px;
+	margin-bottom: 0px;
+}
+
+#comment-holder{
+	padding:10px;
 }
 
 .col-1-2 {
@@ -103,3 +120,76 @@ h3{
 	color: white;
 	text-align: center;
 }
+
+#commentsection hr{
+	width: 70%;
+	left: 0;
+	margin-left: auto;
+	margin-right:auto;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+#commentbox{
+	overflow:auto;
+}
+
+#comment-holder{
+	position: relative;
+	width: 80%;
+	padding-left: 30px;
+	padding-right: 30px;
+	float: right;
+}
+
+#commentsubmit {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  left: 34.5%;
+  text-align: center;
+  height: 5vh;
+  width: 150px;
+  background-color: #F7F7F7;
+  border: 2px solid #DCDCDC;
+  border-radius: 8px;
+  font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 15px;
+}
+
+ .arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid black;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid black;
+}
+
+#arrow-holder{
+	position: relative;
+	float: left;
+	left: 20px;
+}
+
+.space{
+	position: relative;
+	left: 4.5px;
+}
+
+#comment-fields {
+  position: relative;
+  border: none;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  font-size: 20px;
+

@@ -1,24 +1,23 @@
-<div ng-repeat="actionplan in main">
-
-	<div id="upperwrapper">
+<div>
+	<div id="upperwrapper" ng-repeat="actionplan in main">
 	<div id="actionplanmain"> 
 		<div id="plan">
 			<h2>{{actionplan.plan}}</h2>
 		</div>
 		<div id="more-info">
 			<h3> More Info </h3>
-			<div id="actionplan-content">
-				{{actionplan.article}}
+			<div id="actionplan-content" ng-bind-html="actionplan.article | to_trusted">
 			</div>
 		</div>
 		<div id="vote-holder">
-			<div id="vote_for_action_plan">
+			<div id="vote_for_action_plan" type="submit" ng-click="vote()">
 				Vote
 			</div>
 		</div>
 	</div>
+
 	</div>
-	
+<!--
 	<div id = "pro-con-wrapper">
 		<div class="col-1-2">
 			<div id="listwrap">
@@ -32,10 +31,36 @@
 		</div>
 	</div>
 
+-->
 
 	<div id="commentsection">
 			<div id="title">
 				<h2>Comments</h2>
+			</div>
+
+			<form id="propose-form">
+			 <fieldset id="comment-fields">
+	      	<div id="Comment">
+	      	<textarea rows="7" cols="60" form="propose-form" id="comment" ng-model="comment" name="comment" placeholder= "Write your comment"required></textarea>
+	        </div>
+	      	</fieldset>
+	      	</form>
+
+	       <div id="proposebutton-holder">
+	      <fieldset id="proposeactions">
+	          <input type="submit" ng-click="submitComment()" id="commentsubmit" value ="Post">
+	      </fieldset>
+	      </div>
+
+
+			<div id= "commentbox" ng-repeat="comment in side">
+				<hr/>
+				<div id="comment-holder" ng-bind-html="comment.text | to_trusted">
+				</div>
+				<div id="arrow-holder">
+					<div class="arrow-up"></div> <div class="space"> {{comment.upvotes}} </div>  <br>
+					 <div class="space"> {{comment.downvotes}} </div> <div class="arrow-down"> </div> 
+				</div>
 			</div>
 	</div>
 </div>

@@ -1,17 +1,45 @@
- <div id="mainwrap">
-    <h2 id="ap_create_title">Write your action plan</h2>
+ <div id="mainwrap" ng-app>
     <form id="propose-form">
       <fieldset id="propose-fields">
       	<div id="summary">
-      	Summary of Action Plan <input id="issuetitle" type="issuetitle" name="Title" placeholder="Paraphrase your view in less than 140 Characters." required>
+      	Summary of Action Plan <input id="issuetitle" ng-model="plan" type="issuetitle" name="Title" placeholder="Paraphrase your view." required>
         </div>
-      	More Info <br> <textarea rows="15" cols="70" form="propose-form" id="moreInfo" name="More Info" placeholder= "Write an article expanding on your views!"required></textarea>
-     	</div>
+      	More Info <br> <textarea rows="23" cols="70" form="propose-form" id="moreInfo" ng-model="article" name="More Info" placeholder= "Write an article expanding on your views!"required></textarea>
       </fieldset>
-      <div id="proposebutton-holder">
-     	<fieldset id="proposeactions">
-      		<input type="submit" id="proposesubmit" value ="Propose">
-    	</fieldset>
-      </div>
     </form>
+          <div id="proposebutton-holder">
+      <fieldset id="proposeactions">
+          <input type="submit" ng-click="submitAP()" id="proposesubmit" value ="Propose">
+      </fieldset>
+      </div>
+
 </div>
+
+<div id="mark-wrap">
+
+
+  
+
+    <div id="issuetit"> {{plan}} </div>
+      <div id="markup-display">
+        <div id="actionplan-content" ng-bind-html="mark | to_trusted">
+        </div>
+
+  <hr/>
+  <div id="explanation">
+  Type " # " before headers<br>
+    <div style="text-indent: 50px; padding-bottom: 7px;"> e.g. #header </div>
+  Type " - " before bullet points <br>
+    <div style="text-indent: 50px; padding-bottom: 7px;"> e.g. - bullet </div>
+  Type " ** " before and after bolded text <br>
+    <div style="text-indent: 50px; padding-bottom: 7px;"> e.g. **bold** </div>
+  Surround links with square brackets "[ ]" <br>
+    <div style="text-indent: 50px;"> e.g. Click [here] </div>
+    <div style="text-indent: 50px;"> [here]: www.google.com
+    </div>
+  </div>
+
+</div>
+
+</div>
+

@@ -56,7 +56,7 @@
 
 
 <div id="loginbox" >
- <form name="loginForm" ng-controller="LoginController"
+ <form name="loginForm"
       ng-submit="login(credentials)" novalidate>
   <div id="loginfieldwrap">
     <div id="inputwrap">
@@ -68,8 +68,8 @@
       <input type="password" id="password"
              ng-model="credentials.password">
   </div>
-  <div id="loginsubmitholder">
-    <div id="loginsubmit" type="submit"> Go! </div>
+  <div id="loginsubmitholder" >
+    <div id="loginsubmit" ng-click="loginsubmit()"> Go! </div>
   </div>
 </form>
 </div>

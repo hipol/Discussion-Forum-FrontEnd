@@ -1,13 +1,48 @@
 #mainwrap{
-	width: 70%;
-	margin-right: auto;
-	margin-left: auto;
+	width: 45%;
+	float:left;
+	padding: 20px;
+	background-color: #CDF0F0;
+	min-height:100vh;
+	position:fixed;
+	top: 40px;
+}
+
+#mark-wrap{
+	width: 48%;
+	float:right;
+	position: relative;
+	margin-right: 10px;
+	top: 80px;
+}
+
+#explanation{
+	font-size: 14px;
+	line-height: 140%;
+	padding-left: 30%;
+}
+
+#issuetit{
+	font-size:35px;
+}
+
+#mark-wrap h1 {
+  color: #333333;
+  font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 25px;
+  font-weight: normal;
+}
+
+#mark-wrap a {
+	color: #555555;
+	text-decoration: underline;
 }
 
 #issuetitle{
 	margin-top: 10px;
 	width: 90%;
 	border-radius: 20px;
+	border: none;
 	font: 20px;
 	padding: 5px;
 	padding-left: 15px;
@@ -28,7 +63,6 @@
 }
 
 #propose-form{
-	background-color: #bbbbbb;
 	border: none;
 	border-radius: 20px;
 }
@@ -41,6 +75,42 @@
 	font-size: 20px;
 }
 
+#proposeactions{
+	border:none;
+	padding-top:5px;
+}
+
+#proposesubmit{
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+	left: 32.5%;
+
+	text-align: center;
+
+	height:5vh;
+	/* Rectangle 4: */
+	width: 150px;
+	/* Rectangle 4: */
+	background-color: #F7F7F7;
+	border: 2px solid #DCDCDC;
+	border-radius: 8px;
+	font-family: Arial;
+	font-size: 15px;
+	font-style: bold;
+	}
+
+#proposesubmit:hover{
+	cursor: pointer;
+
+	background: #F1F1F1;
+	border: 2px solid #DCDCDC;
+	border-radius: 8px;
+	font-family: Arial;
+	font-size: 15px;
+	font-style: bold;
+	}
+
 #ap_create_title{
 	color: #333333;
 	margin-bottom: 20px;
@@ -48,4 +118,8 @@
 	font-size: 40px;
 	font-weight:normal;
 	text-align: center;
+}
+
+#mark-wrap hr{
+	margin-top: 80px;
 }
