@@ -3,16 +3,23 @@
 
   <div id="small-menu">
     <ul id="small-list">
-      <li class="small" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending">Trending</a></li>
+      <li class="small" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Issues</a></li>
+<!--       <li class="small" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending">Trending</a></li>
+    
+
+     removed, minus location
       <li class="small" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
       <li class="small" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li> 
+      -->
+
+
     </ul>
   </div>
 
      <ul id="navigation">
-                <li class="logo" ui-sref="home" ui-sref-active="active"><a id="Logo" >TownSquare</a></li>
-                  <li class="parent" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending"  >Trending</a></li>
-           <!--     <li class="parent"><a class="white" id="National" href="#" >National</a></li>
+                <li class="logo"><a target="_blank" id="Logo" href="http://townsq.me">TownSquare</a></li>
+<!--                   <li class="parent" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending"  >Trending</a></li>
+               <li class="parent"><a class="white" id="National" href="#" >National</a></li>
                 <li class="parent"><a class="white" id="Provincial" href="#" >Provincial</a></li> 
                 <li class="parent"id="Local"><a class="white" href="#" >Local</a>
                     <ul class="submenu" id="Localmenu">
@@ -21,13 +28,18 @@
                      </ul>
                 </li>   -->
             
+
+<!-- removed, minus location
                 <li class="parent" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
                 <li class="parent" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li>
+-->
+                <li class="parent" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Issues</a></li>
 
             </ul>
             <div id="national-dropdown">
             </div>
 
+<!-- removed, minus search
             <div id="searchbutton-holder">
                 <fieldset id="searchactions">
 
@@ -39,7 +51,7 @@
                     </div>
                 </fieldset>
             </div>
-
+-->
 
 
 
@@ -48,6 +60,7 @@
 <!--    <div id="login"> <a id="login-click" href="/logout"> Logout </a> </div>    -->
 <!--    {% else %}    -->
     <div id="login" > <a id="login-click" ng-click="openLogin()"> Login </a> </div>
+    <div id="logout"> <a id="logout-click" ng-click="Logout()"> Logout </a> </div>
 <!--    {% endif %}      -->
 
 
@@ -56,17 +69,16 @@
 
 
 <div id="loginbox" >
- <form name="loginForm"
-      ng-submit="login(credentials)" novalidate>
+ <form name="loginForm" novalidate>
   <div id="loginfieldwrap">
     <div id="inputwrap">
       <label for="email">Email:</label><br>
       <input type="text" id="email"
-             ng-model="credentials.email"><br>
+             ng-model="email"><br>
     </div>
       <label for="password">Password:</label><br>
       <input type="password" id="password"
-             ng-model="credentials.password">
+             ng-model="password">
   </div>
   <div id="loginsubmitholder" >
     <div id="loginsubmit" ng-click="loginsubmit()"> Go! </div>

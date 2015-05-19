@@ -204,3 +204,8 @@ h2{
 	cursor: pointer;
 }
 
+#aplan:hover{
+	cursor: pointer;
+	font-style: underline;
+}
+

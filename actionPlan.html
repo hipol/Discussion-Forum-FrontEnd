@@ -1,6 +1,8 @@
 <div>
 	<div id="upperwrapper" ng-repeat="actionplan in main">
+		<div id="comment-author-holder"> Written by {{ actionplan.author_id }}, {{actionplan.time_since}}</div>
 	<div id="actionplanmain"> 
+		<div id="delete" ng-model="delete_me"> Delete me </div>
 		<div id="plan">
 			<h2>{{actionplan.plan}}</h2>
 		</div>
@@ -15,8 +17,10 @@
 			</div>
 		</div>
 	</div>
-
 	</div>
+
+
+
 <!--
 	<div id = "pro-con-wrapper">
 		<div class="col-1-2">
@@ -41,26 +45,34 @@
 			<form id="propose-form">
 			 <fieldset id="comment-fields">
 	      	<div id="Comment">
-	      	<textarea rows="7" cols="60" form="propose-form" id="comment" ng-model="comment" name="comment" placeholder= "Write your comment"required></textarea>
+	      	<textarea rows="7" form="propose-form" id="comment" ng-model="comment" name="comment" placeholder= "Write your comment"required></textarea>
 	        </div>
 	      	</fieldset>
 	      	</form>
 
 	       <div id="proposebutton-holder">
-	      <fieldset id="proposeactions">
-	          <input type="submit" ng-click="submitComment()" id="commentsubmit" value ="Post">
-	      </fieldset>
+	        <input type="submit" ng-click="submitComment()" id="commentsubmit" value ="Post">
 	      </div>
 
 
-			<div id= "commentbox" ng-repeat="comment in side">
+			<div id= "commentbox" ng-repeat="comment in comments">
 				<hr/>
-				<div id="comment-holder" ng-bind-html="comment.text | to_trusted">
-				</div>
+
 				<div id="arrow-holder">
-					<div class="arrow-up"></div> <div class="space"> {{comment.upvotes}} </div>  <br>
-					 <div class="space"> {{comment.downvotes}} </div> <div class="arrow-down"> </div> 
+					<div class="arrow-up" ng-click="upvote($index)" id="arrow-up" ng-style=isUpvoted($index) src='sprites.png'></div> 
+
+					<div class="space" id="upvote-count"> {{comment.upvotes}} </div>
+					 <div class="space" id="downvote-count"> {{comment.downvotes}} </div> <div class="arrow-down" ng-click="downvote($index)" id="arrow-down" ng-style=isDownvoted($index) src='sprites.png'> </div> 
 				</div>
+
+				<div id="full-comment-holder">
+					<div id="comment-holder" ng-bind-html="comment.text | to_trusted">
+					</div>
+
+					<div id="comment-author-holder"> Written by {{ comment.author_id }}, {{comment.time_since}}</div>
+				</div>
+
+
 			</div>
 	</div>
 </div>

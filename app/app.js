@@ -1,12 +1,29 @@
 var routerApp = angular.module('routerApp', ['ui.router']);
 
-
 routerApp.config(function($stateProvider, $urlRouterProvider) {
-    
-    $urlRouterProvider.otherwise('/trending');
+
+    $urlRouterProvider.otherwise('/issues');
     
     $stateProvider
         
+        .state('allissues', {
+            url: '/issues',
+            views: {
+                '': { templateUrl: 'app/modules/partial-home.html' },
+                'navbar@allissues': { 
+                    templateUrl: 'app/modules/navbar.html',
+                    controller: 'navBarCtrl'
+                },
+                'sidebar@allissues': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
+                'mainview@allissues': { 
+                    templateUrl: 'allissues.html',
+                    controller: 'communityCtrl'
+                }
+            }
+        })
         .state('trending', {
             url: '/trending',
             views: {
@@ -15,10 +32,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@trending': { templateUrl: 'app/modules/sidebar-signup.html' },
+                'sidebar@trending': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
                 'mainview@trending': { 
                     templateUrl: 'trending.html',
-                    controller: 'communityCtrl'
+                    controller: 'trendingCtrl'
                 }
             }
         })
@@ -44,7 +64,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@actionplan': { templateUrl: 'app/modules/sidebar-signup.html' },
+                'sidebar@actionplan': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
                 'mainview@actionplan': { 
                     templateUrl: 'actionPlan.html',
                     controller: 'actionPlanCtrl'
@@ -61,7 +84,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@london': { templateUrl: 'app/modules/sidebar-signup.html' },
+                'sidebar@london': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
                 'mainview@london': { 
                     templateUrl: 'trending.html',
                     controller: 'communityCtrl'
@@ -100,7 +126,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@bridgewater': { templateUrl: 'app/modules/sidebar-signup.html' },
+                'sidebar@bridgewater': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
                 'mainview@bridgewater': { 
                     templateUrl: 'trending.html',
                     controller: 'communityCtrl'
@@ -115,7 +144,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@issue': { templateUrl: 'app/modules/sidebar-signup.html' },
+                'sidebar@issue': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                },
                 'mainview@issue': { 
                     templateUrl: 'issue.html',
                     controller: 'issueCtrl'
@@ -129,7 +161,9 @@ routerApp.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 }]);
 
-/**
+
+
+
 routerApp.factory('AuthenticationService',
     function (Base64, $http, $rootScope, $timeout, $state) {
         var service = {};
@@ -138,10 +172,7 @@ routerApp.factory('AuthenticationService',
 
             var logindata = Base64.encode(email + ':' + password);
 
-            var config = {headers:  {
-                'Authorization': 'Basic ' + logindata
-                }
-            };
+            $http.defaults.headers.common.Authorization = 'Basic ' + logindata;
 
             // $state.go('london');
 
@@ -155,47 +186,80 @@ routerApp.factory('AuthenticationService',
                             now_email: email,
                             now_id: response.id
                         }
+
                     };
-         
+
                     $http.defaults.headers.common.Authorization = 'Basic ' + authdata; // jshint ignore:line
+                    document.cookie="token=" + authdata;
+                    //document.cookie="user_email=" + __________;
+
                     //$cookieStore.put('globals', $rootScope.globals);
+                    //console.log("token"+ response.token);
+
+                    $state.go($state.current, {}, {reload: true});
                 });
 
         };
  
         service.ClearCredentials = function () {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
+            $rootScope.globals = {
+                    currentUser: {
+                        now_email: null,
+                        now_id: null
+                    }
+
+                };
+            //$cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
+
+            $state.go($state.current, {}, {reload: true});
         };
  
         return service;
     });
 
-**/
+
+
+
+routerApp.controller('sidebarCtrl', function($rootScope, $http, $scope) {
+
+    if ($rootScope.globals.currentUser.now_id != null){
+        var unlogged = document.getElementById("SignUpSide");
+        unlogged.style.display = "none";
+
+        var AP_url = "https://dry-earth-2683.herokuapp.com" + '/auth/user/' + $rootScope.globals.currentUser.now_id;
+
+        $http.get(AP_url)
+        .success(function(response) 
+            {
+              $scope.main= response;
+            });
+
+    }
+
+    else{
+        var unlogged = document.getElementById("UserSide");
+        unlogged.style.display = "none";
+    }
+
+
+
+});
 
 
 routerApp.controller('communityCtrl', function(Base64, $scope, $http) {
-
-
-//var authdata = Base64.encode("jiangaishi@gmail.com" + ':' + "password");
-//$http.defaults.headers.common.Authorization = 'Basic ' + authdata;
-
-     var authdata = Base64.encode("eyJhbGciOiJIUzI1NiIsImV4cCI6MTQzMTAxNDE0OSwiaWF0IjoxNDMxMDEyMzQ5fQ.eyJpZCI6MX0.Fu0_W42zrD-OvDVMjiK9SUZVvyBHu0230FcC1rMae8o" + ':' + ' ');
-         
-    $http.defaults.headers.common.Authorization = 'Basic ' + authdata;
 
 var main_url ="https://dry-earth-2683.herokuapp.com/issue"
 
     $http.get(main_url)
     .success(function(response) 
         {
-           $scope.main= response.issue;
+           $scope.main = response.issue;
         });
 
 });
 
-routerApp.controller('signUpCtrl', function($scope, $http) {
+routerApp.controller('signUpCtrl', function($scope, $http, $state, AuthenticationService) {
 
     $scope.signUp = function () {
 
@@ -209,6 +273,7 @@ routerApp.controller('signUpCtrl', function($scope, $http) {
 
         $http.post('https://dry-earth-2683.herokuapp.com/auth/signup', JSON.stringify(new_user)).
           success(function(data, status, headers, config) {
+             AuthenticationService.Login($scope.email, $scope.password);
              $state.go('trending');
           }).
           error(function(data, status, headers, config) {
@@ -216,8 +281,7 @@ routerApp.controller('signUpCtrl', function($scope, $http) {
             // or server returns response with an error status.
           });
 
-
-       
+        
                 // Simple POST request example (passing data) : 
 
     }
@@ -243,26 +307,225 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
     }
 
     $scope.loginsubmit = function () {
-        //AuthenticationService.Login($scope.email, $scope.password);
-       
+        AuthenticationService.Login($scope.email, $scope.password);
     } 
+
+    if ($rootScope.globals.currentUser.now_id != null){
+        var login = document.getElementById("login");
+        login.style.display = "none";
+
+        var logout = document.getElementById("logout");
+        logout.style.display = "block";
+
+    }
+
+     $scope.Logout = function () {
+        AuthenticationService.ClearCredentials();
+     }
+
+
+});
+
+routerApp.controller('trendingCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
+
+var main_url ="https://dry-earth-2683.herokuapp.com/events"
+
+    $http.get(main_url)
+    .success(function(response) 
+        {
+           $scope.main = response.issue;
+        });
+
 
 });
 
 
-routerApp.controller('actionPlanCtrl', function($scope, $http, $stateParams, $state) {
+routerApp.controller('actionPlanCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
 
     $scope.vote = function () {
         var x = document.getElementById("vote-holder");
         if(x.style.backgroundColor == "red"){
             x.style.backgroundColor = "#333333";
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/delete_vote_by/' + $rootScope.globals.currentUser.now_id;
+            $http.post(vote_url).success(function(response) 
+            {
+
+            });
+
         }
         else{
             x.style.backgroundColor = "red";
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/vote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
         }
     }
 
 
+    var Already_voted_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
+    $http.get(Already_voted_url)
+    .success(function(response) 
+        {
+            if(response == "True"){
+                var x = document.getElementById("vote-holder");
+                x.style.backgroundColor = "red";
+            }
+        });
+
+    $scope.upvote = function($index){
+
+        var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
+
+        if($scope.comments[$index].isGreen == true){
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
+            $http.post(vote_url);
+
+        //
+            $scope.comments[$index].upvotes -= 1;
+            $scope.comments[$index].isGreen = false;
+
+          //  check_all_commentvotes();
+
+
+        }
+        else{
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/upvote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
+
+        //
+            $scope.comments[$index].upvotes += 1;
+            $scope.comments[$index].isGreen = true;
+
+            //delete downvote
+            if($scope.comments[$index].isRed == true){
+
+                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
+                $http.post(vote_url);
+
+            //
+                $scope.comments[$index].downvotes -= 1;
+                $scope.comments[$index].isRed = false;
+
+
+            }
+
+        //    check_all_commentvotes();
+        }
+
+        
+    }
+
+    $scope.downvote = function($index){
+
+        var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
+
+        if($scope.comments[$index].isRed == true){
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
+            $http.post(vote_url);
+
+        //
+            $scope.comments[$index].downvotes -= 1;
+            $scope.comments[$index].isRed = false;
+
+          //  check_all_commentvotes();
+
+
+        }
+        else{
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/downvote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
+
+        //
+            $scope.comments[$index].downvotes += 1;
+            $scope.comments[$index].isRed = true;
+
+        //    check_all_commentvotes();
+
+                    //delete upvote
+            if($scope.comments[$index].isGreen == true){
+
+                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
+                $http.post(vote_url);
+
+            //
+                $scope.comments[$index].upvotes -= 1;
+                $scope.comments[$index].isGreen = false;
+
+
+            }
+
+        }
+        
+    }
+
+    $scope.isUpvoted = function($index){
+        var sprite = $scope.comments[$index].isGreen ? 'url(sprites.png) 23.5px 0px' : 'url(sprites.png) 0px 0px' ;
+        return { background: sprite};
+    }
+
+    $scope.isDownvoted = function($index){
+        var sprite = $scope.comments[$index].isRed ? 'url(sprites.png) 23.5px 26px' : 'url(sprites.png) 0px 26px' ;
+        return { background: sprite};
+    }
+
+    var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
+
+
+    check_all_commentvotes = function(){
+        $http.get(Comment_url)
+        .success(function(response) 
+            {
+              $scope.comments= response.comments;
+
+              for (i = 0; i < $scope.comments.length; i++) { 
+                  console.log($scope.comments[i].id);
+                  
+
+                  var Already_commentvoted_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[i].id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
+                    console.log("i=" + i);
+
+                    check_commentvote(i, Already_commentvoted_url);
+                   
+
+                    console.log("inneri=" +i);
+
+                }
+
+            });
+    }
+
+    check_all_commentvotes();
+
+    check_commentvote = function (x, Already_commentvoted_url){
+        $http.get(Already_commentvoted_url)
+                    .success(function(input) 
+                        {
+                            if(input == 1){
+                                upvotepresent(x);
+                            }
+
+                            if(input == -1){
+                                downvotepresent(x);
+                            }
+                        });
+                }
+
+     upvotepresent = function(i){
+                    $scope.comments[i].isGreen = true;
+                }
+
+    downvotepresent = function(i){
+                    $scope.comments[i].isRed = true;
+                }
+   
 
     var AP_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id;
 
@@ -270,26 +533,45 @@ routerApp.controller('actionPlanCtrl', function($scope, $http, $stateParams, $st
     .success(function(response) 
         {
           $scope.main= response.action_plans;
-        });
+
+           /** Delete Action Plan
+          console.log("equal" + $scope.main[0].author_id);
+
+          if($scope.main[0].author_id == $rootScope.globals.currentUser.now_id){
+                console.log("equalyess");
+                $scope.display_delete();
+                
+          }
+
+          **/
+    });
+
+    /** Delete Action Plan
+    $scope.display_delete = function () {
+        console.log("called");
+        $scope.delete_me.style.display= "block";
+    }
+    **/
+
 
     var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
 
     $http.get(Comment_url)
     .success(function(response) 
         {
-          $scope.side= response.comments;
+          $scope.comments= response.comments;
         });
 
 
 
     var converter = new Showdown.converter();
 
-        $scope.submitComment = function () {
+    $scope.submitComment = function () {
         var htmlText = converter.makeHtml($scope.comment);
 
         var createComment_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/comment/create';
         
-         var new_AP = {comment: htmlText}
+         var new_AP = {comment: htmlText, userid: $rootScope.globals.currentUser.now_id}
 
         $http.post(createComment_url, JSON.stringify(new_AP)).
               success(function(data, status, headers, config) {
@@ -297,7 +579,9 @@ routerApp.controller('actionPlanCtrl', function($scope, $http, $stateParams, $st
                 $http.get(Comment_url)
                 .success(function(response) 
                     {
-                      $scope.side= response.comments;
+                      $scope.comments= response.comments;
+                      check_all_commentvotes();
+                      $scope.comment="";
                     });
               }).
               error(function(data, status, headers, config) {
@@ -322,12 +606,16 @@ routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParam
         
          var new_AP = {plan: $scope.plan, article:htmlText}
 
+
+        
+
         $http.post(createAP_url, JSON.stringify(new_AP)).
               success(function(data, status, headers, config) {
 
                  $state.go('issue', {'issue_id': $stateParams.issue_id});
               }).
               error(function(data, status, headers, config) {
+
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
               });
@@ -458,49 +746,51 @@ function revealMenu() {
     }
 }
 
-routerApp.factory("authenticationSvc", function($http, $q, $window) {
-  var userInfo;
- 
-  function login(userName, password) {
-    var deferred = $q.defer();
- 
-    $http.post("/api/login", {
-      userName: userName,
-      password: password
-    }).then(function(result) {
-      userInfo = {
-        accessToken: result.data.access_token,
-        userName: result.data.userName
-      };
-      $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-      deferred.resolve(userInfo);
-    }, function(error) {
-      deferred.reject(error);
-    });
- 
-    return deferred.promise;
-  }
- 
-  return {
-    login: login
-  };
-});
 
 
-routerApp.run(["$rootScope", "$location", function($rootScope, $location) {
-  $rootScope.$on("$routeChangeSuccess", function(userInfo) {
-    console.log(userInfo);
-  });
- 
-  $rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-    if (eventObj.authenticated === false) {
-      $location.path("/login");
+function checkCookie() {
+    var authdata_token=getCookie("token");
+    if (authdata_token!="") {
+        $http.defaults.headers.common.Authorization = 'Basic ' + authdata_token;
+        return true;
+    }else{
+        return false;
     }
-  });
-}]);
+}
 
-angular.module('routerApp')
-    .filter('to_trusted', ['$sce', function($sce){
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+routerApp.run(function($rootScope, $location) {
+
+    $rootScope.globals = {
+        currentUser: {
+            now_email: null,
+            now_id: null
+        }
+
+    };
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $location.path("/login");
+        }
+      }
+    });
+  });
+
+routerApp.filter('to_trusted', ['$sce', function($sce){
         return function(text) {
             return $sce.trustAsHtml(text);
         };

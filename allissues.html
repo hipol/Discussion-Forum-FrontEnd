@@ -1,3 +1,5 @@
+
+
 <div id="topic_issue_container" ng-repeat="issue in main">
 	<div id = "individual_container" ui-sref="issue({ issue_id: {{issue.id}} })">		
 		<div class="crop">
@@ -18,6 +20,7 @@
 			</div>
 		</div>
 		
+		<!--
 		<div id="action_plan_container">
 			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id">
 					{{ actionplan.plan}}
@@ -27,15 +30,19 @@
 					</div>
 			</div>
 		</div>
+		
+
 
 		<div id="call-to-action">
 			What do you think?
 		</div>
-<!--		<div id="asked_by">
-			Asked by {{issue.author_id}}
+		-->
+
+		<div id="asked_by">
+			Asked by {{issue.author_id}}, {{issue.time_since}}
 		</div>
 
--->
+
 	</div>
 
 	<hr/>

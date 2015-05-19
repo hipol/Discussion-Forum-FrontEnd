@@ -13,6 +13,7 @@
 		</div>
 	</div>
 
+<!--
 	<div id="actionplan_container">
 		<div id="actionplanchoose" class="col-1-3" ng-repeat="actionplan in issue.action_plan_id" ui-sref="actionplan({ issue_id: {{issue.id}}, action_plan_id: {{actionplan.id}} })">
 			<a id='actionplan'>
@@ -28,4 +29,41 @@
 			</a>
 		</div>
 	</div>
+-->
+
+		<div id="action_plan_container">
+			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id" ui-sref="actionplan({ issue_id: {{issue.id}}, action_plan_id: {{actionplan.id}} })">
+					{{ actionplan.plan}}
+
+					<div id="aplan_votes">
+						{{actionplan.votes}} Votes
+					</div>
+			</div>
+		</div>
+		<div id="call-to-action" ui-sref="createActionPlan({ issue_id: {{issue.id}} })">
+			Write your own response
+		</div>
+
+
+
+	<div id="upperwrapper" ng-repeat="actionplan in issue.action_plan_id">
+		<div id="comment-author-holder"> Written by {{ actionplan.author_id }}, {{actionplan.time_since}}</div>
+	<div id="actionplanmain"> 
+		<div id="delete" ng-model="delete_me"> Delete me </div>
+		<div id="plan">
+			<h2>{{actionplan.plan}}</h2>
+		</div>
+		<div id="more-info">
+			<h3> More Info </h3>
+			<div id="actionplan-content" ng-bind-html="actionplan.article | to_trusted">
+			</div>
+		</div>
+		<div id="vote-holder">
+			<div id="vote_for_action_plan" type="submit" ng-click="vote()">
+				Vote
+			</div>
+		</div>
+	</div>
+	</div>
+
 </div>
