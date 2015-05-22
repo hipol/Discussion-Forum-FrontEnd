@@ -2,10 +2,27 @@ var routerApp = angular.module('routerApp', ['ui.router']);
 
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/issues');
+    $urlRouterProvider.otherwise('/signup');
     
     $stateProvider
-        
+        .state('not-signed-in', {
+            url: '/please-sign-in',
+            views: {
+                '': { templateUrl: 'app/modules/partial-home.html' },
+                'navbar@not-signed-in': { 
+                    templateUrl: 'app/modules/navbar.html',
+                    controller: 'navBarCtrl'
+                },
+                'sidebar@not-signed-in': { 
+                    templateUrl: 'app/modules/pleasesignin.html',
+                    controller: 'sidebarCtrl'
+                },
+                'mainview@not-signed-in': { 
+                    templateUrl: 'app/modules/sidebar-signup.html',
+                    controller: 'sidebarCtrl'
+                }
+            }
+        })
         .state('allissues', {
             url: '/issues',
             views: {
@@ -196,7 +213,11 @@ routerApp.factory('AuthenticationService',
                     //$cookieStore.put('globals', $rootScope.globals);
                     //console.log("token"+ response.token);
 
-                    $state.go($state.current, {}, {reload: true});
+
+                    $state.go('allissues');
+                    //$state.go($state.current, {}, {reload: true});
+
+                    
                 });
 
         };
@@ -247,7 +268,25 @@ routerApp.controller('sidebarCtrl', function($rootScope, $http, $scope) {
 });
 
 
-routerApp.controller('communityCtrl', function(Base64, $scope, $http) {
+routerApp.controller('communityCtrl', function(Base64, $scope, $http, $rootScope) {
+
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+
+
+
+
+
 
 var main_url ="https://dry-earth-2683.herokuapp.com/issue"
 
@@ -259,7 +298,22 @@ var main_url ="https://dry-earth-2683.herokuapp.com/issue"
 
 });
 
-routerApp.controller('signUpCtrl', function($scope, $http, $state, AuthenticationService) {
+routerApp.controller('signUpCtrl', function($scope, $http, $state, AuthenticationService, $rootScope) {
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+
+
+
 
     $scope.signUp = function () {
 
@@ -274,7 +328,8 @@ routerApp.controller('signUpCtrl', function($scope, $http, $state, Authenticatio
         $http.post('https://dry-earth-2683.herokuapp.com/auth/signup', JSON.stringify(new_user)).
           success(function(data, status, headers, config) {
              AuthenticationService.Login($scope.email, $scope.password);
-             $state.go('trending');
+             //$state.go('trending');
+             $state.go('allissues');
           }).
           error(function(data, status, headers, config) {
             // called asynchronously if an error occurs
@@ -324,9 +379,30 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
      }
 
 
+
+//hello user
+
+    if ($rootScope.globals.currentUser.now_id != null){
+
+        var AP_url = "https://dry-earth-2683.herokuapp.com" + '/auth/user/' + $rootScope.globals.currentUser.now_id;
+
+        $http.get(AP_url)
+        .success(function(response) 
+            {
+              $scope.main= response;
+            });
+
+    }
+
+    else{
+        var unlogged = document.getElementById("user");
+        unlogged.style.display = "none";
+    }
+
+
 });
 
-routerApp.controller('trendingCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
+routerApp.controller('trendingCtrl', function($scope, $http, $stateParams) {
 
 var main_url ="https://dry-earth-2683.herokuapp.com/events"
 
@@ -337,265 +413,27 @@ var main_url ="https://dry-earth-2683.herokuapp.com/events"
         });
 
 
+
 });
 
 
-routerApp.controller('actionPlanCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
+routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
 
-    $scope.vote = function () {
-        var x = document.getElementById("vote-holder");
-        if(x.style.backgroundColor == "red"){
-            x.style.backgroundColor = "#333333";
 
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/delete_vote_by/' + $rootScope.globals.currentUser.now_id;
-            $http.post(vote_url).success(function(response) 
-            {
-
-            });
-
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
         }
-        else{
-            x.style.backgroundColor = "red";
-
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/vote';
-            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
-            $http.post(vote_url, JSON.stringify(new_vote));
-        }
-    }
-
-
-    var Already_voted_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
-    $http.get(Already_voted_url)
-    .success(function(response) 
-        {
-            if(response == "True"){
-                var x = document.getElementById("vote-holder");
-                x.style.backgroundColor = "red";
-            }
-        });
-
-    $scope.upvote = function($index){
-
-        var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
-
-        if($scope.comments[$index].isGreen == true){
-
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
-            $http.post(vote_url);
-
-        //
-            $scope.comments[$index].upvotes -= 1;
-            $scope.comments[$index].isGreen = false;
-
-          //  check_all_commentvotes();
-
-
-        }
-        else{
-
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/upvote';
-            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
-            $http.post(vote_url, JSON.stringify(new_vote));
-
-        //
-            $scope.comments[$index].upvotes += 1;
-            $scope.comments[$index].isGreen = true;
-
-            //delete downvote
-            if($scope.comments[$index].isRed == true){
-
-                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
-                $http.post(vote_url);
-
-            //
-                $scope.comments[$index].downvotes -= 1;
-                $scope.comments[$index].isRed = false;
-
-
-            }
-
-        //    check_all_commentvotes();
-        }
-
-        
-    }
-
-    $scope.downvote = function($index){
-
-        var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
-
-        if($scope.comments[$index].isRed == true){
-
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
-            $http.post(vote_url);
-
-        //
-            $scope.comments[$index].downvotes -= 1;
-            $scope.comments[$index].isRed = false;
-
-          //  check_all_commentvotes();
-
-
-        }
-        else{
-
-            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/downvote';
-            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
-            $http.post(vote_url, JSON.stringify(new_vote));
-
-        //
-            $scope.comments[$index].downvotes += 1;
-            $scope.comments[$index].isRed = true;
-
-        //    check_all_commentvotes();
-
-                    //delete upvote
-            if($scope.comments[$index].isGreen == true){
-
-                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
-                $http.post(vote_url);
-
-            //
-                $scope.comments[$index].upvotes -= 1;
-                $scope.comments[$index].isGreen = false;
-
-
-            }
-
-        }
-        
-    }
-
-    $scope.isUpvoted = function($index){
-        var sprite = $scope.comments[$index].isGreen ? 'url(sprites.png) 23.5px 0px' : 'url(sprites.png) 0px 0px' ;
-        return { background: sprite};
-    }
-
-    $scope.isDownvoted = function($index){
-        var sprite = $scope.comments[$index].isRed ? 'url(sprites.png) 23.5px 26px' : 'url(sprites.png) 0px 26px' ;
-        return { background: sprite};
-    }
-
-    var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
-
-
-    check_all_commentvotes = function(){
-        $http.get(Comment_url)
-        .success(function(response) 
-            {
-              $scope.comments= response.comments;
-
-              for (i = 0; i < $scope.comments.length; i++) { 
-                  console.log($scope.comments[i].id);
-                  
-
-                  var Already_commentvoted_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/' + $scope.comments[i].id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
-                    console.log("i=" + i);
-
-                    check_commentvote(i, Already_commentvoted_url);
-                   
-
-                    console.log("inneri=" +i);
-
-                }
-
-            });
-    }
-
-    check_all_commentvotes();
-
-    check_commentvote = function (x, Already_commentvoted_url){
-        $http.get(Already_commentvoted_url)
-                    .success(function(input) 
-                        {
-                            if(input == 1){
-                                upvotepresent(x);
-                            }
-
-                            if(input == -1){
-                                downvotepresent(x);
-                            }
-                        });
-                }
-
-     upvotepresent = function(i){
-                    $scope.comments[i].isGreen = true;
-                }
-
-    downvotepresent = function(i){
-                    $scope.comments[i].isRed = true;
-                }
-   
-
-    var AP_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id;
-
-    $http.get(AP_url)
-    .success(function(response) 
-        {
-          $scope.main= response.action_plans;
-
-           /** Delete Action Plan
-          console.log("equal" + $scope.main[0].author_id);
-
-          if($scope.main[0].author_id == $rootScope.globals.currentUser.now_id){
-                console.log("equalyess");
-                $scope.display_delete();
-                
-          }
-
-          **/
+      }
     });
 
-    /** Delete Action Plan
-    $scope.display_delete = function () {
-        console.log("called");
-        $scope.delete_me.style.display= "block";
-    }
-    **/
-
-
-    var Comment_url = "https://dry-earth-2683.herokuapp.com" + '/actionplan/' + $stateParams.action_plan_id + '/comments';
-
-    $http.get(Comment_url)
-    .success(function(response) 
-        {
-          $scope.comments= response.comments;
-        });
 
 
 
-    var converter = new Showdown.converter();
-
-    $scope.submitComment = function () {
-        var htmlText = converter.makeHtml($scope.comment);
-
-        var createComment_url = "https://dry-earth-2683.herokuapp.com/" + $stateParams.action_plan_id + '/comment/create';
-        
-         var new_AP = {comment: htmlText, userid: $rootScope.globals.currentUser.now_id}
-
-        $http.post(createComment_url, JSON.stringify(new_AP)).
-              success(function(data, status, headers, config) {
-
-                $http.get(Comment_url)
-                .success(function(response) 
-                    {
-                      $scope.comments= response.comments;
-                      check_all_commentvotes();
-                      $scope.comment="";
-                    });
-              }).
-              error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-              });
-    }
-
-
-
-});
-
-
-routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParams, $state) {
 
     var converter = new Showdown.converter();
 
@@ -628,15 +466,332 @@ routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParam
 
 });
 
-routerApp.controller('issueCtrl', function($scope, $http, $stateParams) {
+routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, $rootScope, $location, $anchorScroll) {
+
+        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+
+
+
 
   var issue_url = "https://dry-earth-2683.herokuapp.com" + "/issue/" + $stateParams.issue_id;
 
     $http.get(issue_url)
     .success(function(response) 
         {
-          $scope.main= response.issue;
+          $scope.issue= response.issue;
+
         });
+
+
+
+
+// Action Plan Stuffs
+
+    $scope.vote = function ($index) {
+
+        if($scope.issue[0].action_plan_id[$index].isVote == true){
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$index].id + '/delete_vote_by/' + $rootScope.globals.currentUser.now_id;
+
+            $http.post(vote_url).success(function(response) 
+            {
+            });
+
+            $scope.issue[0].action_plan_id[$index].isVote  = false;
+            $scope.issue[0].action_plan_id[$index].votes -= 1;
+
+        }
+        else{
+
+            $scope.issue[0].action_plan_id[$index].isVote  = true;
+            $scope.issue[0].action_plan_id[$index].votes += 1;
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$index].id + '/vote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
+        }
+
+    }
+
+    $scope.isVoted = function($index){
+        var color = $scope.issue[0].action_plan_id[$index].isVote ? 'red' : '#333333' ;
+        return { background: color};
+    }
+
+    check_all_votes = function(){
+        $http.get(issue_url)
+        .success(function(response) 
+            {
+              $scope.issue= response.issue;
+
+              for (i = 0; i < $scope.issue[0].action_plan_id.length; i++) { 
+                  
+
+                   var Already_voted_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[i].id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
+
+                    check_vote(i, Already_voted_url);
+                   
+                }
+
+            });
+    }
+
+    check_all_votes();
+
+    check_vote = function (x, Already_voted_url){
+        $http.get(Already_voted_url)
+                    .success(function(input) 
+                        {
+                            if(input == "True"){
+                                votepresent(x);
+                            }
+                        });
+                }
+
+     votepresent = function(i){
+                    $scope.issue[0].action_plan_id[i].isVote= true;
+                }
+
+
+
+//Action Plan Comment System
+
+    $scope.upvote = function($index, $parent){
+
+        if($scope.issue[0].action_plan_id[$parent].comments[$index].isGreen == true){
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id  + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
+            $http.post(vote_url);
+
+        //
+            $scope.issue[0].action_plan_id[$parent].comments[$index].upvotes -= 1;
+            $scope.issue[0].action_plan_id[$parent].comments[$index].isGreen = false;
+
+          //  check_all_commentvotes();
+
+
+        }
+        else{
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/upvote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
+
+        //
+            $scope.issue[0].action_plan_id[$parent].comments[$index].upvotes += 1;
+            $scope.issue[0].action_plan_id[$parent].comments[$index].isGreen = true;
+
+            //delete downvote
+            if($scope.issue[0].action_plan_id[$parent].comments[$index].isRed == true){
+
+                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
+                $http.post(vote_url);
+
+            //
+                $scope.issue[0].action_plan_id[$parent].comments[$index].downvotes -= 1;
+                $scope.issue[0].action_plan_id[$parent].comments[$index].isRed = false;
+
+
+            }
+
+        //    check_all_commentvotes();
+        }
+
+        
+    }
+
+    $scope.downvote = function($index, $parent){
+
+        if($scope.issue[0].action_plan_id[$parent].comments[$index].isRed == true){
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id+ '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/delete_downvote_by/' + $rootScope.globals.currentUser.now_id;
+            $http.post(vote_url);
+
+        //
+            $scope.issue[0].action_plan_id[$parent].comments[$index].downvotes -= 1;
+            $scope.issue[0].action_plan_id[$parent].comments[$index].isRed = false;
+
+          //  check_all_commentvotes();
+
+
+        }
+        else{
+
+            var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/downvote';
+            var new_vote = {userid: $rootScope.globals.currentUser.now_id};
+            $http.post(vote_url, JSON.stringify(new_vote));
+
+        //
+            $scope.issue[0].action_plan_id[$parent].comments[$index].downvotes += 1;
+            $scope.issue[0].action_plan_id[$parent].comments[$index].isRed = true;
+
+        //    check_all_commentvotes();
+
+                    //delete upvote
+            if($scope.issue[0].action_plan_id[$parent].comments[$index].isGreen == true){
+
+                var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
+                $http.post(vote_url);
+
+            //
+                $scope.issue[0].action_plan_id[$parent].comments[$index].upvotes -= 1;
+                $scope.issue[0].action_plan_id[$parent].comments[$index].isGreen = false;
+
+
+            }
+
+        }
+        
+    }
+
+    $scope.isUpvoted = function($index, $parent){
+        var sprite = $scope.issue[0].action_plan_id[$parent].comments[$index].isGreen ? 'url(sprites.png) 23.5px 0px' : 'url(sprites.png) 0px 0px' ;
+        return { background: sprite};
+    }
+
+    $scope.isDownvoted = function($index, $parent){
+        var sprite = $scope.issue[0].action_plan_id[$parent].comments[$index].isRed ? 'url(sprites.png) 23.5px 26px' : 'url(sprites.png) 0px 26px' ;
+        return { background: sprite};
+    }
+
+    check_all_commentvotes = function(){
+        $http.get(issue_url)
+        .success(function(response) 
+            {
+              $scope.issue= response.issue;
+
+              for (i = 0; i < $scope.issue[0].action_plan_id.length; i++) { 
+
+                  for (x = 0; x < $scope.issue[0].action_plan_id[i].comments.length; x++) { 
+
+                  var Already_commentvoted_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[i].id + '/' + $scope.issue[0].action_plan_id[i].comments[x].id + '/check_vote/' + $rootScope.globals.currentUser.now_id;
+                    
+                    check_commentvote(i,x, Already_commentvoted_url);
+
+                    }
+
+                }
+
+            });
+    }
+
+    check_all_commentvotes();
+
+    check_commentvote = function (i,x, Already_commentvoted_url){
+        $http.get(Already_commentvoted_url)
+                    .success(function(input) 
+                        {
+                            if(input == 1){
+                                upvotepresent(i,x);
+                            }
+
+                            if(input == -1){
+                                downvotepresent(i,x);
+                            }
+                        });
+                }
+
+     upvotepresent = function(i,x){
+                    $scope.issue[0].action_plan_id[i].comments[x].isGreen = true;
+                }
+
+    downvotepresent = function(i,x){
+                    $scope.issue[0].action_plan_id[i].comments[x].isRed = true;
+                }
+
+
+
+
+    var converter = new Showdown.converter();
+
+    $scope.submitComment = function ($index) {
+        var htmlText = converter.makeHtml($scope.issue[0].action_plan_id[$index].comment_create);
+
+        var createComment_url = "https://dry-earth-2683.herokuapp.com/" +  $scope.issue[0].action_plan_id[$index].id + '/comment/create';
+        
+         var new_AP = {comment: htmlText, userid: $rootScope.globals.currentUser.now_id}
+
+        $http.post(createComment_url, JSON.stringify(new_AP)).
+              success(function(data, status, headers, config) {
+
+                $http.get(issue_url)
+                .success(function(response) 
+                    {
+                      $scope.issue= response.issue;
+                      check_all_commentvotes();
+                      $scope.issue[0].action_plan_id[$index].comment_create="";
+                    });
+              }).
+              error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+              });
+    }
+
+
+    $scope.isCommentDisplay = function ($index) {
+        var displays = $scope.issue[0].action_plan_id[$index].yesDisplay ? 'block' : 'none' ;
+        return { display: displays };
+    }
+
+    $scope.isOppositeCommentDisplay = function ($index) {
+        var displays = $scope.issue[0].action_plan_id[$index].yesDisplay ? 'none' : 'block' ;
+        return { display: displays };
+    }
+
+    $scope.displayComment = function ($index) {
+        if ($scope.issue[0].action_plan_id[$index].yesDisplay == false){
+            $scope.issue[0].action_plan_id[$index].yesDisplay = true;
+        }
+        else{
+            $scope.issue[0].action_plan_id[$index].yesDisplay = false;
+        }
+    }
+
+
+
+    $scope.gotoActionPlan = function($index) {
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('aplan-author-holder'+$index);
+
+      // call $anchorScroll()
+      $anchorScroll();
+    };
+
+ $http.get(issue_url)
+        .success(function(response) 
+            {
+              $scope.issue= response.issue;
+
+                if ($scope.issue[0].action_plan_id.length == 0){
+                        $scope.actionplanempty={display:'none'};
+                }
+
+                $scope.isAuthor = function($index){
+                    if ($scope.issue[0].action_plan_id[$index].id == $rootScope.globals.currentUser.now_id){
+                        return { display: block};
+                    }
+                    
+                }
+
+            });
+
+
+
+
+
+
 
 });
 
@@ -769,7 +924,7 @@ function getCookie(cname) {
     return "";
 }
 
-routerApp.run(function($rootScope, $location) {
+routerApp.run(function($rootScope, $location, $state) {
 
     $rootScope.globals = {
         currentUser: {
@@ -780,11 +935,12 @@ routerApp.run(function($rootScope, $location) {
     };
 
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
       if ($rootScope.loggedInUser == null) {
         // no logged user, redirect to /login
         if ( next.templateUrl === "partials/login.html") {
         } else {
-          $location.path("/login");
+          $state.go('not-signed-in');
         }
       }
     });

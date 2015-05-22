@@ -1,12 +1,11 @@
 #upperwrapper{
 	height: auto;
-	margin: 30px;
 }
 
 
 #actionplanmain{
 	height:auto;
-	font-size: 20px;
+	font-size: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
@@ -23,6 +22,7 @@
 
 #plan h2{
 	text-align: center;
+	margin-top: 15px;
 	margin-bottom: 0px;
 	padding-top: 20px;
 	font-size:40px;
@@ -51,7 +51,7 @@
 	width: 150px;
 	margin-right: auto;
 	margin-left: auto;
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 	color: white;
 	font-weight: bold;
 	background-color: #333333;
@@ -64,7 +64,7 @@
 #commentsection{
 	margin: auto;
 	position: relative;
-	width:60%;
+	width:80%;
 	height:auto; 
 	background: #ecf0f1;
 	border-style: solid;
@@ -138,7 +138,7 @@ h3{
 #comment-author-holder, #comment-holder{
 	position: relative;
 	width: 100%;
-	padding: 0px;
+	padding-right: 0px;
 	float: right;
 }
 
@@ -218,6 +218,7 @@ h3{
 }
 
 #full-comment-holder{
+	min-height: 120px;
 	width: 75%;
 	overflow:auto;
 	left: 40px;
@@ -237,4 +238,7 @@ h3{
 	font-size: 12px;
 	text-align: center;
 	color: grey;
+	position: absolute;
+    bottom: 0;
+    left: 0;
 }

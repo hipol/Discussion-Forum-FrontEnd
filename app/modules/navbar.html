@@ -55,11 +55,14 @@
 
 
 
+<div id="user">
+  <a> Hello {{main.first_name}}!</a>
 
+</div>
 <!--    {% if g.user %}    -->
 <!--    <div id="login"> <a id="login-click" href="/logout"> Logout </a> </div>    -->
 <!--    {% else %}    -->
-    <div id="login" > <a id="login-click" ng-click="openLogin()"> Login </a> </div>
+    <div id="login" > <a ui-sref="signup" style="padding-right: 5px;"> Sign Up </a> <a style="padding-right: 5px; color: rgba(255,255,255,0.7)">or</a>   <a id="login-click" ng-click="openLogin()"> Login </a> </div>
     <div id="logout"> <a id="logout-click" ng-click="Logout()"> Logout </a> </div>
 <!--    {% endif %}      -->
 

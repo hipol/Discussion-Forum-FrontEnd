@@ -1,12 +1,16 @@
-<div ng-repeat="issue in main">
-	<div id="upperwrapper">
+<div ng-repeat="issue in issue">
+	<div id="mainwrapper">
+
 		<div id="issue"> 
+			<div id="small_asked_by">
+			Asked by {{issue.author_id}}, {{issue.time_since}}
+			</div>
 			<div id="title">
 				{{issue.title}}
 			</div>
 			<hr/>
 			<div id="background">
-				<h3> What you need to know </h3>
+				 <!-- <h3> Additional Information </h3> -->
 				<div id="backgroundcontent" ng-bind-html="issue.info | to_trusted">
 				</div>
 			</div>
@@ -30,40 +34,111 @@
 		</div>
 	</div>
 -->
+<h4 ng-style=actionplanempty> What Do Other Citizens Think? </h4>
 
-		<div id="action_plan_container">
-			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id" ui-sref="actionplan({ issue_id: {{issue.id}}, action_plan_id: {{actionplan.id}} })">
-					{{ actionplan.plan}}
+		<div id="action_plan_container" ng-style=actionplanempty>
+			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id" ng-click="gotoActionPlan($index)">
+					{{$index+1}}. {{ actionplan.plan}}
 
 					<div id="aplan_votes">
-						{{actionplan.votes}} Votes
+						{{actionplan.votes}} <span>Votes</span>
 					</div>
 			</div>
 		</div>
-		<div id="call-to-action" ui-sref="createActionPlan({ issue_id: {{issue.id}} })">
+		<div id="call-to-action-ap" ui-sref="createActionPlan({ issue_id: {{issue.id}} })">
+			<div id="write-own-response">
 			Write your own response
-		</div>
-
-
-
-	<div id="upperwrapper" ng-repeat="actionplan in issue.action_plan_id">
-		<div id="comment-author-holder"> Written by {{ actionplan.author_id }}, {{actionplan.time_since}}</div>
-	<div id="actionplanmain"> 
-		<div id="delete" ng-model="delete_me"> Delete me </div>
-		<div id="plan">
-			<h2>{{actionplan.plan}}</h2>
-		</div>
-		<div id="more-info">
-			<h3> More Info </h3>
-			<div id="actionplan-content" ng-bind-html="actionplan.article | to_trusted">
 			</div>
 		</div>
-		<div id="vote-holder">
-			<div id="vote_for_action_plan" type="submit" ng-click="vote()">
-				Vote
-			</div>
-		</div>
-	</div>
-	</div>
 
+
+	<div id="actionplanwrapper" ng-style="actionplanempty">
+
+		<div id="upperwrapper" ng-repeat="actionplan in issue.action_plan_id">
+
+				
+			<div id="actionplanmain"> 
+				<div id="aplan-author-holder{{$index}}" class="aplan-author-holder"> Written by {{ actionplan.author_id }}, {{actionplan.time_since}}
+				</div>
+				<hr/>
+				<div id="delete" ng-model="delete_me"> Delete me </div>
+				<div id="plan">
+					<h2>{{actionplan.plan}}</h2>
+				</div>
+				<div id="more-info">
+					<h3> More Info </h3>
+					<div id="actionplan-content" ng-bind-html="actionplan.article | to_trusted">
+					</div>
+				</div>
+				<div id="vote-holder" ng-style="isVoted($index)"> 
+					<div id="vote_for_action_plan" type="submit" ng-click="vote($index)" >
+						Vote
+					</div>
+				</div>
+
+				<div id="comment-display-toggle" ng-click="commentstyle={display:'block'}; oppositestyle={display:'none'}" ng-style="oppositestyle"> Display Comments ({{actionplan.comments.length}}) </div>
+				<div id="comment-display-hide" ng-click="commentstyle={display:'none'}; oppositestyle={display:'block'}" ng-style="commentstyle"> Hide Comments (-) </div>
+
+
+</br>
+
+			<div id="commentsection" ng-style="commentstyle">
+
+					<div id="title">
+						<h2>Comments</h2>
+					</div>
+
+					<form id="propose-form">
+					 <fieldset id="comment-fields">
+			      	<div id="Comment">
+			      	<textarea rows="7" form="propose-form" id="comment" ng-model="actionplan.comment_create" name="comment" placeholder= "Write your comment"required></textarea>
+			        </div>
+			      	</fieldset>
+			      	</form>
+
+			       <div id="proposebutton-holder">
+			        <input type="submit" ng-click="submitComment($index)" id="commentsubmit" value ="Post">
+			      </div>
+
+					<div id= "commentbox" ng-repeat="comment in actionplan.comments">
+						<hr/>
+
+						<div id="arrow-holder">
+							<div class="arrow-up" ng-click="upvote($index, $parent.$index)" id="arrow-up" ng-style="isUpvoted($index, $parent.$index)" src='sprites.png'></div> 
+
+							<div class="space" id="upvote-count"> {{comment.upvotes}} </div>
+							 <div class="space" id="downvote-count"> {{comment.downvotes}} </div> <div class="arrow-down" ng-click="downvote($index, $parent.$index)" id="arrow-down" ng-style="isDownvoted($index, $parent.$index)" src='sprites.png'> </div> 
+						</div>
+
+						<div id="full-comment-holder">
+							
+
+							<div id="comment-holder" ng-bind-html="comment.text | to_trusted">
+							</div>
+
+							<div id="comment-author-holder"> Written by {{ comment.author_id }}, {{comment.time_since}}</div>
+						</div>
+
+
+					</div>
+
+
+					
+
+			</div>
+
+
+
+			</div>
+
+			
+
+		
+
+
+
+
+		</div>
+
+	</div>
 </div>

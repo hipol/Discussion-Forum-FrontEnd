@@ -1,8 +1,8 @@
 
 #upperwrapper{
-	width:85%;
-	margin-right: auto;
-	margin-left: auto;
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 30px;
 }
 
 #issue{
@@ -204,8 +204,95 @@ h2{
 	cursor: pointer;
 }
 
+#aplan{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-decoration: underline !important;
+	color: #391919;
+}
+
 #aplan:hover{
 	cursor: pointer;
-	font-style: underline;
+	color: #496969;
+}
+
+#commentsection{
+	display:none;
+}
+
+#comment-display-toggle, #comment-display-hide{
+	text-decoration: underline;
+	color: #5171d1;
+	text-align: center;
+	font-size: 15px;
+}
+
+#comment-display-toggle:hover, #comment-display-hide:hover{
+	cursor: pointer;
+}
+
+#comment-display-hide{
+	display:none;
+}
+
+#small_asked_by{
+	font-size: 15px;
+	text-align: center;
+	color: grey;
+}
+
+#actionplanwrapper{
+	border-radius: 10px;
+	padding-bottom: 30px;
+	background-color: #E4F3F3;
+
+}
+
+#actionplanmain{
+	padding-top: 20px;
+	padding-bottom: 10px;
+	background-color: #FAFDFD;
+	border-radius: 5px;
+}
+
+
+#call-to-action-ap{
+	padding: 20px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+	font-size: 20px;
+	color: black;
+	margin: 0;
+	width: auto;
+}
+
+#call-to-action-ap:hover{
+	cursor: pointer;
+}
+
+h4{
+	text-align: center;
+	font-size: 20px
+}
+
+.aplan-author-holder{
+	font-size: 15px;
+	text-align: center;
+}
+
+#write-own-response{
+	width: 280px;
+	margin: 0 auto;
+	border: 2px solid black;
+	padding: 5px;
+	border-radius: 20px;
+}
+
+#write-own-response:hover{
+	color: #888888;
+	border: 2px solid #888888;
 }
 

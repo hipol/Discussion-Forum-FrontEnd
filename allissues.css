@@ -114,3 +114,7 @@ hr {
 	text-align: center;
 	color: #872F70;
 }
+
+#call-to-action:hover{
+	cursor: pointer;
+}
