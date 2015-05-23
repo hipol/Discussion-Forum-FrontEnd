@@ -207,7 +207,11 @@ routerApp.factory('AuthenticationService',
                     };
 
                     $http.defaults.headers.common.Authorization = 'Basic ' + authdata; // jshint ignore:line
-                    document.cookie="token=" + authdata;
+                        document.cookie="token=" + authdata + ";";
+                        document.cookie= "user_id=" + $rootScope.globals.currentUser.now_id + ";";
+                        document.cookie= "user_email=" + $rootScope.globals.currentUser.now_email + ";";
+
+                    console.log("stored token=" + authdata+ "; user_id=" + $rootScope.globals.currentUser.now_id + "; user_email=" + $rootScope.globals.currentUser.now_email);
                     //document.cookie="user_email=" + __________;
 
                     //$cookieStore.put('globals', $rootScope.globals);
@@ -223,6 +227,8 @@ routerApp.factory('AuthenticationService',
         };
  
         service.ClearCredentials = function () {
+            console.log("clearcredentials")
+
             $rootScope.globals = {
                     currentUser: {
                         now_email: null,
@@ -230,6 +236,11 @@ routerApp.factory('AuthenticationService',
                     }
 
                 };
+
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+
             //$cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
 
@@ -365,6 +376,37 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
         AuthenticationService.Login($scope.email, $scope.password);
     } 
 
+     $scope.Logout = function () {
+        AuthenticationService.ClearCredentials();
+     }
+
+    if ($rootScope.globals.currentUser.now_id == null){
+        checkCookie();
+    }
+
+    function checkCookie() {
+        var authdata_token=getCookie("token");
+        if (authdata_token!="") {
+            console.log("inhere");
+
+            $http.defaults.headers.common.Authorization = 'Basic ' + authdata_token;
+            console.log(authdata_token);
+
+            var user_id=getCookie("user_id");
+            console.log("user_id:" + user_id);
+            var user_email=getCookie("user_email");
+            console.log("user_email:" + user_email);
+
+                $rootScope.globals = {
+                    currentUser: {
+                        now_email: user_email,
+                        now_id: user_id
+                    }
+
+                };
+        }
+    }
+
     if ($rootScope.globals.currentUser.now_id != null){
         var login = document.getElementById("login");
         login.style.display = "none";
@@ -373,12 +415,6 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
         logout.style.display = "block";
 
     }
-
-     $scope.Logout = function () {
-        AuthenticationService.ClearCredentials();
-     }
-
-
 
 //hello user
 
@@ -898,18 +934,6 @@ function revealMenu() {
         x.style.top = "0px"; 
         y.style.top = "48px";
         z.style.top = "80px";
-    }
-}
-
-
-
-function checkCookie() {
-    var authdata_token=getCookie("token");
-    if (authdata_token!="") {
-        $http.defaults.headers.common.Authorization = 'Basic ' + authdata_token;
-        return true;
-    }else{
-        return false;
     }
 }
 
