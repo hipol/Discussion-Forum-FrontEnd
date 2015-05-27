@@ -1,9 +1,10 @@
-<div ng-repeat="issue in issue">
+ <div ng-repeat="issue in issue">
 	<div id="mainwrapper">
 
 		<div id="issue"> 
+			<div id="delete3" ng-style="isAuthorShowIssue()" ng-click="deleteIssue()"> Delete </div>
 			<div id="small_asked_by">
-			Asked by {{issue.author_id}}, {{issue.time_since}}
+			Asked by {{issue.author}}, {{issue.time_since}}
 			</div>
 			<div id="title">
 				{{issue.title}}
@@ -34,17 +35,27 @@
 		</div>
 	</div>
 -->
-<h4 ng-style=actionplanempty> What Do Other Citizens Think? </h4>
 
-		<div id="action_plan_container" ng-style=actionplanempty>
-			<div id="aplan" ng-repeat="actionplan in issue.action_plan_id" ng-click="gotoActionPlan($index)">
-					{{$index+1}}. {{ actionplan.plan}}
-
-					<div id="aplan_votes">
-						{{actionplan.votes}} <span>Votes</span>
-					</div>
+		<div ng-style=actionplanemptypresent id="call-to-action-ap" ui-sref="createActionPlan({ issue_id: {{issue.id}} })">
+			<div id="write-own-response">
+			Write your own response
 			</div>
 		</div>
+
+
+		<div ng-style=actionplanempty id="what-do-others-think">
+			<h4 ng-style=actionplanempty> What Do Other Citizens Think? </h4>
+
+			<div id="action_plan_container" ng-style=actionplanempty>
+				<div id="aplan" ng-repeat="actionplan in issue.action_plan_id" ng-click="gotoActionPlan($index)">
+						{{$index+1}}. {{ actionplan.plan}}
+
+						<div id="aplan_votes">
+							{{actionplan.votes}} <span>Votes</span>
+						</div>
+				</div>
+			</div>
+
 		<div id="call-to-action-ap" ui-sref="createActionPlan({ issue_id: {{issue.id}} })">
 			<div id="write-own-response">
 			Write your own response
@@ -52,21 +63,35 @@
 		</div>
 
 
+
+		</div>
+
+
+
+
 	<div id="actionplanwrapper" ng-style="actionplanempty">
 
 		<div id="upperwrapper" ng-repeat="actionplan in issue.action_plan_id">
 
+
 				
 			<div id="actionplanmain"> 
-				<div id="aplan-author-holder{{$index}}" class="aplan-author-holder"> Written by {{ actionplan.author_id }}, {{actionplan.time_since}}
+
+
+				<div id="aplan-author-holder{{$index}}" class="aplan-author-holder"> Written by {{ actionplan.author }}, {{actionplan.time_since}}
 				</div>
+
+				<div id="delete" ng-style="isAuthorShow($index)" ng-click="deleteActionPlan($index)"> Delete </div>
 				<hr/>
-				<div id="delete" ng-model="delete_me"> Delete me </div>
+				
+
+<!--				<div id="edit" ng-style="isAuthorShow($index)" ng-click="editActionPlan($index)"> Edit me </div>
+-->
+
 				<div id="plan">
 					<h2>{{actionplan.plan}}</h2>
 				</div>
 				<div id="more-info">
-					<h3> More Info </h3>
 					<div id="actionplan-content" ng-bind-html="actionplan.article | to_trusted">
 					</div>
 				</div>
@@ -94,11 +119,13 @@
 			      	<textarea rows="7" form="propose-form" id="comment" ng-model="actionplan.comment_create" name="comment" placeholder= "Write your comment"required></textarea>
 			        </div>
 			      	</fieldset>
-			      	</form>
+			      	
 
 			       <div id="proposebutton-holder">
 			        <input type="submit" ng-click="submitComment($index)" id="commentsubmit" value ="Post">
 			      </div>
+
+			      </form>
 
 					<div id= "commentbox" ng-repeat="comment in actionplan.comments">
 						<hr/>
@@ -111,12 +138,13 @@
 						</div>
 
 						<div id="full-comment-holder">
+							<div id="delete2" ng-style="isAuthorShowComment($index, $parent.$index)" ng-click="deleteComment($index, $parent.$index)"> Delete </div>
 							
 
 							<div id="comment-holder" ng-bind-html="comment.text | to_trusted">
 							</div>
 
-							<div id="comment-author-holder"> Written by {{ comment.author_id }}, {{comment.time_since}}</div>
+							<div id="comment-author-holder"> Written by {{ comment.author }}, {{comment.time_since}}</div>
 						</div>
 
 

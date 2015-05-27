@@ -21,11 +21,10 @@
 }
 
 #plan h2{
+	font-weight: bold;
 	text-align: center;
-	margin-top: 15px;
 	margin-bottom: 0px;
-	padding-top: 20px;
-	font-size:40px;
+	font-size:20px;
 	color: #333333;
 }
 
@@ -48,7 +47,7 @@
 #vote-holder{
 	padding: 10px;
 	text-align: center;
-	width: 150px;
+	width: 70px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 30px;
@@ -63,13 +62,9 @@
 
 #commentsection{
 	margin: auto;
+	margin-top: 30px;
 	position: relative;
-	width:80%;
 	height:auto; 
-	background: #ecf0f1;
-	border-style: solid;
-	border: 3px solid #696969;
-	border-radius: 14px;
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -79,8 +74,9 @@
 
 #commentsection #title h2{
 	color: black;
-	font-size: 25px;
+	font-size: 17px;
 	margin-bottom: 0px;
+	font-weight: bold;
 }
 
 #comment-holder{
@@ -136,6 +132,8 @@ h3{
 }
 
 #comment-author-holder, #comment-holder{
+	padding-bottom: 30px;
+  	padding-top: 0px;
 	position: relative;
 	width: 100%;
 	padding-right: 0px;
@@ -182,15 +180,11 @@ h3{
 #comment-fields {
   position: relative;
   border: none;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 20px;
   font-size: 20px;
 }
-
- #delete {
-	display: none;
- }
 
 #arrow-up {
     width: 23.9px;
@@ -212,14 +206,16 @@ h3{
 
 #comment{
 	position: relative;
-	width: 99%;
+	width: 80%;
+	margin-left: 8%;
+	padding: 10px;
 	border: solid #aaaaaa 2px;
 	border-radius: 5px;
 }
 
 #full-comment-holder{
 	min-height: 120px;
-	width: 75%;
+	width: 80%;
 	overflow:auto;
 	left: 40px;
 	position: relative;
@@ -241,4 +237,5 @@ h3{
 	position: absolute;
     bottom: 0;
     left: 0;
+    padding-bottom: 10px;
 }

@@ -3,12 +3,18 @@
 
   <div id="small-menu">
     <ul id="small-list">
-      <li class="small" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Issues</a></li>
-<!--       <li class="small" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending">Trending</a></li>
+      <li ng-style="isAdminShow()" class="small" ui-sref="createIssue" ui-sref-active="active" id="askQ"><a class="white" id="AskQ">Ask a Question</a></li>
+      <li class="small" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+      <li class="small" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Sample Issues</a></li>
+
+
+      
+
+ <!--      <li class="small" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending">Trending</a></li>
     
 
      removed, minus location
-      <li class="small" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+      
       <li class="small" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li> 
       -->
 
@@ -18,8 +24,8 @@
 
      <ul id="navigation">
                 <li class="logo"><a target="_blank" id="Logo" href="http://townsq.me">TownSquare</a></li>
-<!--                   <li class="parent" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending"  >Trending</a></li>
-               <li class="parent"><a class="white" id="National" href="#" >National</a></li>
+ <!--                   <li class="parent" ui-sref="trending" ui-sref-active="active"><a class="white" id="Trending"  >Trending</a></li>
+             <li class="parent"><a class="white" id="National" href="#" >National</a></li>
                 <li class="parent"><a class="white" id="Provincial" href="#" >Provincial</a></li> 
                 <li class="parent"id="Local"><a class="white" href="#" >Local</a>
                     <ul class="submenu" id="Localmenu">
@@ -30,10 +36,12 @@
             
 
 <!-- removed, minus location
-                <li class="parent" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+                
                 <li class="parent" ui-sref="bridgewater" ui-sref-active="active"><a class="white" id="Bridgewater">Bridgewater</a></li>
 -->
-                <li class="parent" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Issues</a></li>
+                <li class="parent" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Sample Issues</a></li>
+                <li class="parent" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
+                <li ng-style="isAdminShow()" class="parent" ui-sref="createIssue" ui-sref-active="active" id="askQ"><a class="white" id="AskQ">Ask a Question</a></li>
 
             </ul>
             <div id="national-dropdown">
@@ -42,7 +50,7 @@
 <!-- removed, minus search
             <div id="searchbutton-holder">
                 <fieldset id="searchactions">
-
+ 
                     <div id="searchholder">
                         <input id="search" class="input" type="search" ng-model="query" name="Search" placeholder="Search" required>
                     </div>
@@ -91,6 +99,17 @@
 
 
 
+
+
+<div id="please-login-background" ng-style="modaldisplay" ng-click="closeModal()">
+  <div id="please-login-box">
+    <div id="please-login">
+  Oops! Looks like you're not currently logged in. 
+  <br> <br>
+  Please log in!
+    </div>
+  </div>
+</div>
 
 
 <!--            <div id='error'>

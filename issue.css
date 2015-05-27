@@ -1,8 +1,7 @@
 
 #upperwrapper{
-	width: 90%;
 	margin: 0 auto;
-	padding-top: 30px;
+	padding: 15px;
 }
 
 #issue{
@@ -243,25 +242,25 @@ h2{
 	color: grey;
 }
 
-#actionplanwrapper{
+#upperwrapper{
 	border-radius: 10px;
-	padding-bottom: 30px;
-	background-color: #E4F3F3;
+	background-color: #EAEAEA;
+	margin-bottom: 20px;
 
 }
 
 #actionplanmain{
 	padding-top: 20px;
 	padding-bottom: 10px;
-	background-color: #FAFDFD;
+	background-color: rgba(255,255,255,0.6);
 	border-radius: 5px;
 }
 
 
 #call-to-action-ap{
 	padding: 20px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 20px;
+	padding-bottom: 10px;
 	text-align: center;
 	font-size: 20px;
 	color: black;
@@ -279,20 +278,68 @@ h4{
 }
 
 .aplan-author-holder{
-	font-size: 15px;
+	font-size: 12px;
 	text-align: center;
 }
 
 #write-own-response{
-	width: 280px;
+	background-color: #333333;
+	width: 250px;
 	margin: 0 auto;
-	border: 2px solid black;
-	padding: 5px;
-	border-radius: 20px;
+	padding: 7px;
+	color: white;
+	border-radius: 3px;
+	font-size: 16px;
 }
 
 #write-own-response:hover{
-	color: #888888;
-	border: 2px solid #888888;
+	background-color: #666666;
 }
 
+#delete, #delete2, #delete3, #edit{
+	display: none;
+	text-decoration: underline;
+	float: right;
+}
+
+#delete2{
+	padding-top: 5px;
+}
+
+#delete{
+	padding-right: 40px;
+	top: -40px;
+	padding-top: 0px;
+}
+
+#delete3{
+	font-size: 15px;
+}
+
+
+#delete:hover, #delete2:hover, #delete3:hover {
+	cursor: pointer;
+}
+
+
+#what-do-others-think{
+	margin: 0 auto;
+	margin-top: 50px;
+	background-color: blue;
+	background: #E7F1FF;
+	border-radius: 14px;
+	width:80%;
+	padding-bottom: 10px;
+	margin-bottom: 40px;
+
+}
+
+#action_plan_container{
+	width:90%;
+	background: rgba(255,255,255,0.6);
+	border-radius: 5px;
+	position: relative;
+	margin: 0 auto;
+	padding: 10px;
+	margin-top:10px;
+}

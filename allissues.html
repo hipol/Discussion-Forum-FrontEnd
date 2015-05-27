@@ -1,5 +1,4 @@
 
-
 <div id="topic_issue_container" ng-repeat="issue in main">
 	<div id = "individual_container" ui-sref="issue({ issue_id: {{issue.id}} })">		
 		<div class="crop">
@@ -39,7 +38,7 @@
 		-->
 
 		<div id="asked_by">
-			Asked by {{issue.author_id}}, {{issue.time_since}}
+			Asked by {{issue.author}}, {{issue.time_since}}
 		</div>
 
 

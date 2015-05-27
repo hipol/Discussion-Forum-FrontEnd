@@ -595,4 +595,53 @@ ul#small-list a:hover{
 }
 
 
+#please-login-background{
+	display: none;
 
+	top: 0;
+	background: rgba(40,40,40,0.7);
+	width: 100vw;
+	height:100vh;
+	position: fixed;
+	z-index: 99999;
+}
+
+#please-login-box{
+	width: 300px;
+	height: 300px;
+	color: black;
+	z-index: 999999;
+	position: fixed;
+
+	border: 3px solid black;
+	background: rgba(200,200,200,0.95);
+	text-align: center;
+
+	position: fixed;
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 150px;
+
+
+	font-size: 20px;
+	border-radius: 14px;
+}
+
+#please-login{
+	position: fixed;
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 60px;
+    width: 260px;
+    font-size: 15px;
+}
+
+#askQ{
+	display: none;
+}

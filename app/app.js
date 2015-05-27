@@ -73,6 +73,20 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('createIssue', {
+            url: '/issue/create',
+            views: {
+                '': { templateUrl: 'app/modules/partial-signup.html' },
+                'navbar@createIssue': { 
+                    templateUrl: 'app/modules/navbar.html',
+                    controller: 'navBarCtrl'
+                },
+                'signview@createIssue': { 
+                    templateUrl: 'createIssue.html',
+                    controller: 'createIssueCtrl'
+                }
+            }
+        })
         .state('actionplan', {
             url: '/issue/:issue_id/actionplan/:action_plan_id',
             views: {
@@ -107,7 +121,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 },
                 'mainview@london': { 
                     templateUrl: 'trending.html',
-                    controller: 'communityCtrl'
+                    controller: 'londonCtrl'
                 }
             }
         })
@@ -132,6 +146,20 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 'signview@signup': { 
                     templateUrl: 'app/modules/signup.html',
                     controller: 'signUpCtrl'
+                }
+            }
+        })
+        .state('signup-poli', {
+            url: '/signup/1fj0239j2r38j89sl3ofije',
+            views: {
+                '': { templateUrl: 'app/modules/partial-signup.html' },
+                'navbar@signup-poli': { 
+                    templateUrl: 'app/modules/navbar.html',
+                    controller: 'navBarCtrl'
+                },
+                'signview@signup-poli': { 
+                    templateUrl: 'app/modules/signup.html',
+                    controller: 'signUpPoliCtrl'
                 }
             }
         })
@@ -171,6 +199,9 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         });
+
+
+
          
 });
 
@@ -201,7 +232,8 @@ routerApp.factory('AuthenticationService',
                     $rootScope.globals = {
                         currentUser: {
                             now_email: email,
-                            now_id: response.id
+                            now_id: response.id,
+                            now_is_admin: response.is_admin
                         }
 
                     };
@@ -210,29 +242,34 @@ routerApp.factory('AuthenticationService',
                         document.cookie="token=" + authdata + ";";
                         document.cookie= "user_id=" + $rootScope.globals.currentUser.now_id + ";";
                         document.cookie= "user_email=" + $rootScope.globals.currentUser.now_email + ";";
-
-                    console.log("stored token=" + authdata+ "; user_id=" + $rootScope.globals.currentUser.now_id + "; user_email=" + $rootScope.globals.currentUser.now_email);
-                    //document.cookie="user_email=" + __________;
-
-                    //$cookieStore.put('globals', $rootScope.globals);
-                    //console.log("token"+ response.token);
+                        document.cookie= "user_is_admin=" + $rootScope.globals.currentUser.now_is_admin + ";";
 
 
-                    $state.go('allissues');
-                    //$state.go($state.current, {}, {reload: true});
+                    // $state.go($state.current, {}, {reload: true});
+                    // instead of a refresh, just update name
 
                     
                 });
 
         };
  
+        service.DisplayModalSignIn = function () {
+            var b = document.getElementById("please-login-background");
+            b.style.display = "block"; 
+        }
+
+        service.CloseModalSignIn = function () {
+            var b = document.getElementById("please-login-background");
+            b.style.display = "none"; 
+        }
+
         service.ClearCredentials = function () {
-            console.log("clearcredentials")
 
             $rootScope.globals = {
                     currentUser: {
                         now_email: null,
-                        now_id: null
+                        now_id: null,
+                        now_is_admin: null
                     }
 
                 };
@@ -240,9 +277,11 @@ routerApp.factory('AuthenticationService',
             document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            document.cookie = "user_is_admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
             //$cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
+
 
             $state.go($state.current, {}, {reload: true});
         };
@@ -281,7 +320,6 @@ routerApp.controller('sidebarCtrl', function($rootScope, $http, $scope) {
 
 routerApp.controller('communityCtrl', function(Base64, $scope, $http, $rootScope) {
 
-
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         console.log("change")
       if ($rootScope.loggedInUser == null) {
@@ -307,6 +345,81 @@ var main_url ="https://dry-earth-2683.herokuapp.com/issue"
            $scope.main = response.issue;
         });
 
+});
+
+routerApp.controller('londonCtrl', function(Base64, $scope, $http, $rootScope) {
+
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+
+
+
+
+
+
+var main_url ="https://dry-earth-2683.herokuapp.com/1/issue"
+
+    $http.get(main_url)
+    .success(function(response) 
+        {
+           $scope.main = response.issue;
+        });
+
+});
+
+routerApp.controller('signUpPoliCtrl', function($scope, $http, $state, AuthenticationService, $rootScope) {
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+    $scope.firstname = "Michael";
+    $scope.lastname = "van Holst";
+
+
+
+    $scope.signUp = function () {
+
+        var new_user= {email: $scope.email, first_name:$scope.firstname, last_name:$scope.lastname, password:$scope.password, postal_code:$scope.postalcode};
+
+        $http.get('https://dry-earth-2683.herokuapp.com/issue')
+        .success(function(response) 
+        {
+           $scope.main= response.issue;
+        });
+
+        $http.post('https://dry-earth-2683.herokuapp.com/auth/signup/admin', JSON.stringify(new_user)).
+          success(function(data, status, headers, config) {
+             AuthenticationService.Login($scope.email, $scope.password);
+             //$state.go('trending');
+             $state.go('allissues');
+          }).
+          error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+
+        
+                // Simple POST request example (passing data) : 
+
+    }
 });
 
 routerApp.controller('signUpCtrl', function($scope, $http, $state, AuthenticationService, $rootScope) {
@@ -354,7 +467,9 @@ routerApp.controller('signUpCtrl', function($scope, $http, $state, Authenticatio
 });
 
 
+
 routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, AuthenticationService, $state) {
+
 
     $scope.openLogin = function () {
         var x = document.getElementById("loginbox");
@@ -372,8 +487,39 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
             }
     }
 
+    $scope.closeModal = function () {
+        console.log("closeme");
+        AuthenticationService.CloseModalSignIn();
+    }
+
     $scope.loginsubmit = function () {
         AuthenticationService.Login($scope.email, $scope.password);
+        console.log("it is null")
+
+        if ($rootScope.globals.currentUser.now_id != null){
+
+            console.log("its not null")
+            
+            var AP_url = "https://dry-earth-2683.herokuapp.com" + '/auth/user/' + $rootScope.globals.currentUser.now_id;
+
+            $http.get(AP_url)
+            .success(function(response) 
+                {
+                  $scope.main= response;
+                });
+
+            var login = document.getElementById("login");
+            login.style.display = "none";
+
+            var logout = document.getElementById("logout");
+            logout.style.display = "block";
+
+            var unlogged = document.getElementById("user");
+            unlogged.style.display = "block";
+
+        }
+
+
     } 
 
      $scope.Logout = function () {
@@ -387,23 +533,26 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
     function checkCookie() {
         var authdata_token=getCookie("token");
         if (authdata_token!="") {
-            console.log("inhere");
 
             $http.defaults.headers.common.Authorization = 'Basic ' + authdata_token;
-            console.log(authdata_token);
 
             var user_id=getCookie("user_id");
-            console.log("user_id:" + user_id);
             var user_email=getCookie("user_email");
-            console.log("user_email:" + user_email);
+            var user_is_admin=getCookie("user_is_admin");
+
+            console.log("checks cookie" + user_is_admin);
+
 
                 $rootScope.globals = {
                     currentUser: {
                         now_email: user_email,
-                        now_id: user_id
+                        now_id: user_id,
+                        now_is_admin: user_is_admin
                     }
 
                 };
+
+
         }
     }
 
@@ -427,13 +576,25 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
             {
               $scope.main= response;
             });
-
     }
-
     else{
         var unlogged = document.getElementById("user");
         unlogged.style.display = "none";
     }
+
+    $scope.isAdminShow = function(){
+
+
+        if ($rootScope.globals.currentUser.now_is_admin == "true" ) {
+            return { display: "block" };
+        }
+
+        else {
+            return { display: "none" };
+        }
+        
+    }
+
 
 
 });
@@ -453,7 +614,7 @@ var main_url ="https://dry-earth-2683.herokuapp.com/events"
 });
 
 
-routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParams, $state, $rootScope) {
+routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParams, $state, $rootScope, AuthenticationService) {
 
 
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
@@ -473,15 +634,22 @@ routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParam
 
     var converter = new Showdown.converter();
 
+
+
     $scope.submitAP = function () {
-        var htmlText = converter.makeHtml($scope.article);
+
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
+
+        if ($scope.plan == null){
+            return;
+        }
 
         var createAP_url = "https://dry-earth-2683.herokuapp.com" + "/issue/" + $stateParams.issue_id + '/plan/create';
         
-         var new_AP = {plan: $scope.plan, article:htmlText}
-
-
-        
+         var new_AP = {plan: $scope.plan, article: $scope.mark, userid: $rootScope.globals.currentUser.now_id}
 
         $http.post(createAP_url, JSON.stringify(new_AP)).
               success(function(data, status, headers, config) {
@@ -489,7 +657,69 @@ routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParam
                  $state.go('issue', {'issue_id': $stateParams.issue_id});
               }).
               error(function(data, status, headers, config) {
+                    AuthenticationService.ClearCredentials();
+                    console.log("plese ")
+                    
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+              });
 
+    }
+
+   $scope.$watch('article', function() {
+       $scope.mark = converter.makeHtml($scope.article);
+   });
+   
+});
+
+
+routerApp.controller('createIssueCtrl', function($scope, $http, $stateParams, $state, $rootScope, AuthenticationService) {
+
+
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        console.log("change")
+      if ($rootScope.loggedInUser == null) {
+        // no logged user, redirect to /login
+        if ( next.templateUrl === "partials/login.html") {
+        } else {
+          $state.go('not-signed-in');
+        }
+      }
+    });
+
+
+    var converter = new Showdown.converter();
+
+    $scope.submitIssue = function () {
+
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
+
+        if ($scope.issue == null){
+            return;
+        }
+
+        if ($scope.photo == null){
+            return;
+        }
+
+        var htmlText = converter.makeHtml($scope.article);
+
+        var createIssue_url = "https://dry-earth-2683.herokuapp.com/1/create/issue";
+        
+         var new_Issue = {title: $scope.issue, picture: $scope.photo, article:htmlText, userid: $rootScope.globals.currentUser.now_id}
+
+
+        $http.post(createIssue_url, JSON.stringify(new_Issue)).
+              success(function(data, status, headers, config) {
+
+                 $state.go('allissues');
+              }).
+              error(function(data, status, headers, config) {
+                    AuthenticationServerice.DisplayModalSignIn();
+                    AuthenticationService.ClearCredentials();
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
               });
@@ -499,10 +729,17 @@ routerApp.controller('createActionPlanCtrl', function($scope, $http, $stateParam
        $scope.mark = converter.makeHtml($scope.article);
    });
    
-
 });
 
-routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, $rootScope, $location, $anchorScroll) {
+
+
+
+
+
+
+
+
+routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, $rootScope, $location, $anchorScroll, AuthenticationService) {
 
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         console.log("change")
@@ -534,6 +771,11 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
 // Action Plan Stuffs
 
     $scope.vote = function ($index) {
+
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
 
         if($scope.issue[0].action_plan_id[$index].isVote == true){
 
@@ -604,6 +846,11 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
 
     $scope.upvote = function($index, $parent){
 
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
+
         if($scope.issue[0].action_plan_id[$parent].comments[$index].isGreen == true){
 
             var vote_url = "https://dry-earth-2683.herokuapp.com/" + $scope.issue[0].action_plan_id[$parent].id  + '/' + $scope.issue[0].action_plan_id[$parent].comments[$index].id + '/delete_upvote_by/' + $rootScope.globals.currentUser.now_id;
@@ -647,6 +894,11 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
     }
 
     $scope.downvote = function($index, $parent){
+
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
 
         if($scope.issue[0].action_plan_id[$parent].comments[$index].isRed == true){
 
@@ -751,6 +1003,12 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
     var converter = new Showdown.converter();
 
     $scope.submitComment = function ($index) {
+
+        if ($rootScope.globals.currentUser.now_id == null){
+            AuthenticationService.DisplayModalSignIn();
+            return;
+        }
+
         var htmlText = converter.makeHtml($scope.issue[0].action_plan_id[$index].comment_create);
 
         var createComment_url = "https://dry-earth-2683.herokuapp.com/" +  $scope.issue[0].action_plan_id[$index].id + '/comment/create';
@@ -809,19 +1067,149 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
         .success(function(response) 
             {
               $scope.issue= response.issue;
+              $scope.actionplanemptypresent={display:'none'};
 
                 if ($scope.issue[0].action_plan_id.length == 0){
                         $scope.actionplanempty={display:'none'};
+                        $scope.actionplanemptypresent={display:'block', margin:'20px'};
                 }
 
-                $scope.isAuthor = function($index){
-                    if ($scope.issue[0].action_plan_id[$index].id == $rootScope.globals.currentUser.now_id){
-                        return { display: block};
+                $scope.isAuthorShow = function($index){
+                    if ($scope.issue[0].action_plan_id[$index].author_id == $rootScope.globals.currentUser.now_id){
+                        return { display: "block" };
                     }
                     
                 }
 
+                $scope.isAuthorShowComment = function($index, $parent){
+                    if ($scope.issue[0].action_plan_id[$parent].comments[$index].author_id == $rootScope.globals.currentUser.now_id){
+                        return { display: "block" };
+                    }
+                }
+
+                $scope.isAuthorShowIssue = function(){
+                    if ($scope.issue[0].author_id == $rootScope.globals.currentUser.now_id){
+                        return { display: "block" };
+                    }
+                }
+
+
+
             });
+
+
+$scope.deleteActionPlan = function($index){
+
+    var deleteActionPlan_url = "https://dry-earth-2683.herokuapp.com/actionplan/delete/" + $scope.issue[0].action_plan_id[$index].id ;
+
+    $http.post(deleteActionPlan_url).
+          success(function(data, status, headers, config) {
+
+            $http.get(issue_url)
+            .success(function(response) 
+                {
+                  $scope.issue= response.issue;
+                });
+          }).
+          error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+}
+
+
+
+
+$scope.deleteComment = function($index, $parent){
+
+    var deleteComment_url = "https://dry-earth-2683.herokuapp.com/comment/delete/" + $scope.issue[0].action_plan_id[$parent].comments[$index].id;
+
+    $http.post(deleteComment_url).
+          success(function(data, status, headers, config) {
+
+            $http.get(issue_url)
+            .success(function(response) 
+                {
+                  $scope.issue= response.issue;
+                });
+          }).
+          error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+}
+
+$scope.deleteIssue = function(){
+
+    var deleteIssue_url = "https://dry-earth-2683.herokuapp.com/issue/delete/" + $scope.issue[0].id;
+
+    $http.post(deleteIssue_url).
+          success(function(data, status, headers, config) {
+
+            $state.go('allissues');
+
+          }).
+          error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+}
+
+
+
+/// this doesn't work yet - how to reverse markup?!
+$scope.editActionPlan = function($index){
+
+    var ap_url = "https://dry-earth-2683.herokuapp.com/actionplan/" + $scope.issue[0].action_plan_id[$index].id ;
+
+    $http.get(ap_url)
+    .success(function(response) 
+        {
+           $scope.ap = response.action_plans;
+          // $scope.article = response;
+          //$scope.plan = fdfdf;
+
+            var editActionPlan_url = "https://dry-earth-2683.herokuapp.com/actionplan/edit/" + $scope.issue[0].action_plan_id[$index].id ;
+
+
+
+////
+            var htmlText = converter.makeHtml($scope.article);
+
+            var createAP_url = "https://dry-earth-2683.herokuapp.com" + "/issue/" + $stateParams.issue_id + '/plan/create';
+            
+             var new_AP = {plan: $scope.plan, article:htmlText}
+
+            $http.post(createAP_url, JSON.stringify(new_AP)).
+                  success(function(data, status, headers, config) {
+
+                     $state.go('issue', {'issue_id': $stateParams.issue_id});
+                  }).
+                  error(function(data, status, headers, config) {
+
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                  });
+                
+
+        });
+
+}
+
+
+///
+
+////
+
+
+
+
+///
+
+
+
+
+
 
 
 
@@ -830,6 +1218,7 @@ routerApp.controller('issueCtrl', function($scope, $http, $stateParams, $state, 
 
 
 });
+
 
 
 
@@ -953,21 +1342,13 @@ routerApp.run(function($rootScope, $location, $state) {
     $rootScope.globals = {
         currentUser: {
             now_email: null,
-            now_id: null
+            now_id: null,
+            now_is_admin: null
+
         }
 
     };
 
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-        console.log("change")
-      if ($rootScope.loggedInUser == null) {
-        // no logged user, redirect to /login
-        if ( next.templateUrl === "partials/login.html") {
-        } else {
-          $state.go('not-signed-in');
-        }
-      }
-    });
   });
 
 routerApp.filter('to_trusted', ['$sce', function($sce){

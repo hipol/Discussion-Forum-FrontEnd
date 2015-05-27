@@ -19,7 +19,6 @@ img.bg {
 }
 
 #bgmask {
-  background-color: rgba(0,0,0,0.3);
   /* Set rules to fill background */
   min-height: 100%;
   min-width: 1024px;
@@ -55,18 +54,26 @@ body{
 /** Sign Up Box **/
 
 #signup-wrap{
+	padding-bottom: 20px;
+	border: 3px solid black;
+	background: rgba(40,40,40,0.95);
 	position: relative;
 	text-align: center;
 	width: 40%;
 	min-width: 350px;
-	max-height: 90vh;
-	margin-left: 13%;
+
 	height:auto;
 	font-size: 20px;
-	top: 80px;
-	position: relative;
 	border-radius: 14px;
 	z-index:999;
+
+	position: fixed;
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 400px;
 
 	/*float: left;
 	width: 40%;*/
@@ -110,7 +117,7 @@ body{
 	margin-bottom:18px;
 	border: 3px solid white;
 	font-size: 13px;
-	border-radius: 20px;
+	border-radius: 2px;
 	padding-top:0;
 }
 
@@ -145,4 +152,12 @@ body{
 	color: #dddddd;
 	cursor: pointer;
 	border-color: #dddddd;
+}
+
+input:required {
+    box-shadow:none !important;
+
+}
+input:invalid {
+    box-shadow:0 0 3px red;
 }

@@ -2,26 +2,35 @@
     <form id="propose-form">
       <fieldset id="propose-fields">
       	<div id="summary">
-      	Title <input id="issuetitle" ng-model="plan" type="issuetitle" name="Title" placeholder="Paraphrase your view." required>
+      	Title <input id="issuetitle" ng-model="issue" type="issuetitle" name="Title" placeholder="e.g. Should food trucks be allowed in London?" required>
         </div>
-      	More Info <br> 
-        <textarea cols="70" id="moreInfo" ng-model="article" type="issuetitle" name="Title" placeholder="Write an article expanding on your views!" required> </textarea>
+        <div id="picture">
+        Photo url <input id="issuetitle" ng-model="photo" type="issuetitle" name="Title" placeholder="e.g. http://thepolitic.org/wp-content/uploads/2012/04/politics1.jpg" required>
+        </div>
+      	More Info <br> <textarea style="height:45vh;" cols="70" form="propose-form" id="moreInfo" ng-model="article" name="More Info" placeholder= "Give additional information on this issue!"required></textarea>
       </fieldset>
     
-      <div id="proposebutton-holder">
+          <div id="proposebutton-holder">
       <fieldset id="proposeactions">
-          <input type="submit" ng-click="submitAP()" id="proposesubmit" value ="Propose">
+          <input type="submit" ng-click="submitIssue()" id="proposesubmit" value ="Post Question">
       </fieldset>
       </div>
-    </form>
+      </form>
+
 </div>
 
 <div id="mark-wrap">
 
 
   
+    <div class="crop">
+      
+      <img id = "picture" src="{{photo}}"></img>
 
-    <div id="issuetit"> {{plan}} </div>
+    </div>
+
+    <div id="issuetit"> {{issue}} </div>
+
       <div id="markup-display">
         <div id="actionplan-content" ng-bind-html="mark | to_trusted">
         </div>
@@ -44,4 +53,3 @@
 </div>
 
 </div>
-
