@@ -405,16 +405,13 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
 
     $scope.openLogin = function () {
         var x = document.getElementById("loginbox");
-        var y = document.getElementById("signup-wrap"); 
         var window_width = window.innerWidth;
 
             if (x.style.display == "block") {
                 x.style.display = "none";
-                y.style.top = "18vh";
             } 
             else{  
                 x.style.display = "block"; 
-                y.style.top = "27vh";
             }
     }
 
