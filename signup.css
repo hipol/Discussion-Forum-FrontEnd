@@ -48,6 +48,8 @@ img.bg {
 
 body{
 	font-family: "Century Gothic",'Lucida Sans Unicode',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: "bold";
+	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 

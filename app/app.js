@@ -5,24 +5,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/signup');
     
     $stateProvider
-        .state('not-signed-in', {
-            url: '/please-sign-in',
-            views: {
-                '': { templateUrl: 'app/modules/partial-home.html' },
-                'navbar@not-signed-in': { 
-                    templateUrl: 'app/modules/navbar.html',
-                    controller: 'navBarCtrl'
-                },
-                'sidebar@not-signed-in': { 
-                    templateUrl: 'app/modules/pleasesignin.html',
-                    controller: 'sidebarCtrl'
-                },
-                'mainview@not-signed-in': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
-                }
-            }
-        })
         .state('allissues', {
             url: '/issues',
             views: {
@@ -30,10 +12,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 'navbar@allissues': { 
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
-                },
-                'sidebar@allissues': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
                 },
                 'mainview@allissues': { 
                     templateUrl: 'allissues.html',
@@ -48,10 +26,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 'navbar@trending': { 
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
-                },
-                'sidebar@trending': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
                 },
                 'mainview@trending': { 
                     templateUrl: 'trending.html',
@@ -95,10 +69,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@actionplan': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
-                },
                 'mainview@actionplan': { 
                     templateUrl: 'actionPlan.html',
                     controller: 'actionPlanCtrl'
@@ -114,10 +84,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 'navbar@london': { 
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
-                },
-                'sidebar@london': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
                 },
                 'mainview@london': { 
                     templateUrl: 'trending.html',
@@ -171,10 +137,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
                 },
-                'sidebar@bridgewater': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
-                },
                 'mainview@bridgewater': { 
                     templateUrl: 'trending.html',
                     controller: 'communityCtrl'
@@ -188,10 +150,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 'navbar@issue': { 
                     templateUrl: 'app/modules/navbar.html',
                     controller: 'navBarCtrl'
-                },
-                'sidebar@issue': { 
-                    templateUrl: 'app/modules/sidebar-signup.html',
-                    controller: 'sidebarCtrl'
                 },
                 'mainview@issue': { 
                     templateUrl: 'issue.html',
@@ -290,32 +248,6 @@ routerApp.factory('AuthenticationService',
     });
 
 
-
-
-routerApp.controller('sidebarCtrl', function($rootScope, $http, $scope) {
-
-    if ($rootScope.globals.currentUser.now_id != null){
-        var unlogged = document.getElementById("SignUpSide");
-        unlogged.style.display = "none";
-
-        var AP_url = "https://dry-earth-2683.herokuapp.com" + '/auth/user/' + $rootScope.globals.currentUser.now_id;
-
-        $http.get(AP_url)
-        .success(function(response) 
-            {
-              $scope.main= response;
-            });
-
-    }
-
-    else{
-        var unlogged = document.getElementById("UserSide");
-        unlogged.style.display = "none";
-    }
-
-
-
-});
 
 
 routerApp.controller('communityCtrl', function(Base64, $scope, $http, $rootScope) {
@@ -473,8 +405,7 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
 
     $scope.openLogin = function () {
         var x = document.getElementById("loginbox");
-        var x2 = document.getElementById("loginbox");
-        var y = document.getElementById("SignUpSide"); 
+        var y = document.getElementById("signup-wrap"); 
         var window_width = window.innerWidth;
 
             if (x.style.display == "block") {
@@ -1313,16 +1244,13 @@ routerApp.factory('Base64', function () {
 function revealMenu() {
     var x = document.getElementById("small-menu");
     var y = document.getElementById("mainview"); 
-    var z = document.getElementById("signup-wrap"); 
     if (x.style.top == "0px") {
         x.style.top = "46px";
         y.style.top = "96px";
-        z.style.top = "128px";
     } 
     else{  
         x.style.top = "0px"; 
         y.style.top = "48px";
-        z.style.top = "80px";
     }
 }
 
