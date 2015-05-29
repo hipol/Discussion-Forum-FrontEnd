@@ -206,7 +206,27 @@ routerApp.factory('AuthenticationService',
                     // $state.go($state.current, {}, {reload: true});
                     // instead of a refresh, just update name
 
-                    
+                         if ($rootScope.globals.currentUser.now_id != null){
+                            
+                            var AP_url = "https://dry-earth-2683.herokuapp.com" + '/auth/user/' + $rootScope.globals.currentUser.now_id;
+
+                            $http.get(AP_url)
+                            .success(function(response) 
+                                {
+                                  $scope.main= response;
+                                });
+
+                            var login = document.getElementById("login");
+                            login.style.display = "none";
+
+                            var logout = document.getElementById("logout");
+                            logout.style.display = "block";
+
+                            var unlogged = document.getElementById("user");
+                            unlogged.style.display = "block";
+
+                        }
+
                 });
 
         };
@@ -416,15 +436,15 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
     }
 
     $scope.closeModal = function () {
-        console.log("closeme");
         AuthenticationService.CloseModalSignIn();
     }
 
     $scope.loginsubmit = function () {
         AuthenticationService.Login($scope.email, $scope.password);
-        console.log("it is null")
+        
 
-        if ($rootScope.globals.currentUser.now_id != null){
+/**
+ if ($rootScope.globals.currentUser.now_id != null){
 
             console.log("its not null")
             
@@ -446,6 +466,12 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
             unlogged.style.display = "block";
 
         }
+        else{
+            console.log("it is null");
+        }
+**/
+
+
 
 
     } 
