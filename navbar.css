@@ -134,7 +134,6 @@ ul#navigation li.last {
 	color: white;
 	padding-left: 30px;
 	padding-right: 30px;
-	padding-bottom: 15px;
 }
 
 #navigation .parent a{
@@ -144,6 +143,8 @@ ul#navigation li.last {
 #logout, #login{
 	z-index: 9999;
 	position: fixed;
+	-webkit-font-smoothing: subpixel-antialiased;
+
 	top: 11px;
 	right: 10px;
 	text-decoration: none;
@@ -506,9 +507,10 @@ a{
 	top: 48px;
 	right: 0px;
 	color: white;
-	background-color: #666666;
+	background-color: #444444;
 	padding: 20px;
-	border-radius: 0,0,5px, 5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
 
 	-webkit-transition-duration: 0.5s; /* Safari */
     transition-duration: 0.5s;
@@ -642,8 +644,4 @@ ul#small-list a:hover{
     height: 60px;
     width: 260px;
     font-size: 15px;
-}
-
-#askQ{
-	display: none;
 }

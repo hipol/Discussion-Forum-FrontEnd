@@ -213,7 +213,7 @@ routerApp.factory('AuthenticationService',
                             $http.get(AP_url)
                             .success(function(response) 
                                 {
-                                  $scope.main= response;
+                                  $rootScope.main= response;
                                 });
 
                             var login = document.getElementById("login");
@@ -226,6 +226,16 @@ routerApp.factory('AuthenticationService',
                             unlogged.style.display = "block";
 
                         }
+
+                    var x = document.getElementById("loginbox");
+                    x.style.display = "none";
+
+                    if ($rootScope.globals.currentUser.now_is_admin == true ) {
+                        console.log("bloc");
+                        var x = document.getElementById("AskQ");
+                        x.style.display = "block";
+                    }
+
 
                 });
 
@@ -423,6 +433,8 @@ routerApp.controller('signUpCtrl', function($scope, $http, $state, Authenticatio
 routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, AuthenticationService, $state) {
 
 
+
+
     $scope.openLogin = function () {
         var x = document.getElementById("loginbox");
         var window_width = window.innerWidth;
@@ -433,6 +445,9 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
             else{  
                 x.style.display = "block"; 
             }
+
+        var x = document.getElementById("AskQ");
+        x.style.display = "none";
     }
 
     $scope.closeModal = function () {
@@ -528,7 +543,7 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
         $http.get(AP_url)
         .success(function(response) 
             {
-              $scope.main= response;
+              $rootScope.main= response;
             });
     }
     else{
@@ -538,8 +553,11 @@ routerApp.controller('navBarCtrl', function($scope, $http, $rootScope, Authentic
 
     $scope.isAdminShow = function(){
 
+        if ($rootScope.globals.currentUser.now_is_admin == "true") {
+            return { display: "block" };
+        }
 
-        if ($rootScope.globals.currentUser.now_is_admin == "true" ) {
+        else if ($rootScope.globals.currentUser.now_is_admin == true){
             return { display: "block" };
         }
 
