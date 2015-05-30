@@ -196,6 +196,7 @@ routerApp.factory('AuthenticationService',
 
                     };
 
+
                     $http.defaults.headers.common.Authorization = 'Basic ' + authdata; // jshint ignore:line
                         document.cookie="token=" + authdata + ";";
                         document.cookie= "user_id=" + $rootScope.globals.currentUser.now_id + ";";
@@ -237,6 +238,8 @@ routerApp.factory('AuthenticationService',
                     }
 
 
+                }).error(function(data, status, headers, config) {
+                    console.log("error with your login credentials");
                 });
 
         };
@@ -680,8 +683,10 @@ routerApp.controller('createIssueCtrl', function($scope, $http, $stateParams, $s
         var htmlText = converter.makeHtml($scope.article);
 
         var createIssue_url = "https://dry-earth-2683.herokuapp.com/1/create/issue";
+
+        $scope.photo_url = "https://res.cloudinary.com/demo/image/fetch/" + $scope.photo;
         
-         var new_Issue = {title: $scope.issue, picture: $scope.photo, article:htmlText, userid: $rootScope.globals.currentUser.now_id}
+         var new_Issue = {title: $scope.issue, picture: $scope.photo_url, article:htmlText, userid: $rootScope.globals.currentUser.now_id}
 
 
         $http.post(createIssue_url, JSON.stringify(new_Issue)).

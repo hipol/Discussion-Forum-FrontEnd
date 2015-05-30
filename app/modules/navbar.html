@@ -5,7 +5,7 @@
     <ul id="small-list">
       <li ng-style="isAdminShow()" class="small" ui-sref="createIssue" ui-sref-active="active" id="askQ"><a class="white" id="AskQ">Ask a Question</a></li>
       <li class="small" ui-sref="london" ui-sref-active="active"><a class="white" id="London" >London </a></li>
-      <li class="small" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Sample Issues</a></li>
+      <li class="small" ui-sref="allissues" ui-sref-active="active"><a class="white" id="Issues">Issues</a></li>
 
 
       
@@ -80,19 +80,19 @@
 
 
 <div id="loginbox" >
- <form name="loginForm" novalidate>
+ <form name="loginForm" validate>
   <div id="loginfieldwrap">
     <div id="inputwrap">
       <label for="email">Email:</label><br>
       <input type="text" id="email"
-             ng-model="email"><br>
+             ng-model="email" required><br>
     </div>
       <label for="password">Password:</label><br>
       <input type="password" id="password"
-             ng-model="password">
+             ng-model="password" required>
   </div>
   <div id="loginsubmitholder" >
-    <div id="loginsubmit" ng-click="loginsubmit()"> Go! </div>
+    <div type="submit" id="loginsubmit" ng-click="loginsubmit()"> Go! </div>
   </div>
 </form>
 </div>
